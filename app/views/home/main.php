@@ -1,5 +1,5 @@
 <div class="cover mask-cover">
-	<img class="img-cover" src="/project/public/image/fish.jpg"/>
+	<img class="img-cover" src="/gourylls/public/image/fish.jpg"/>
 </div>
 <div class="row-fluid">
 	<div class="span12 dice">

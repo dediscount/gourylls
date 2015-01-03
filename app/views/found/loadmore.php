@@ -1,9 +1,9 @@
 			<div id="photoid" class="found-photo-container"><!--iterate this container to display more photos-->
 				<div class="found-photo-head">
 					<h1 class="found-photo-title">Title</h1>
-					<a class="found-photo-user" href="#"><img src="/project/public/user/userid/userid_icon.png" class="img-circle found-photo-user-icon" title="username"></a>
+					<a class="found-photo-user" href="#"><img src="/gourylls/public/user/userid/userid_icon.png" class="img-circle found-photo-user-icon" title="username"></a>
 				</div>
-				<div class="found-photo-content" style="background-image:url('/project/public/user/userid/photos/korean.jpg')">
+				<div class="found-photo-content" style="background-image:url('/gourylls/public/user/userid/photos/korean.jpg')">
 				</div>
 				<div class="found-photo-description">
 					<p>description here!</p>
