@@ -6,7 +6,7 @@
 	}
 	if($("#upload-photo-text"))
 	{
-		$("#upload-photo-text > input[required='required']").keypress(checkRequired);
+		$("#upload-photo-text > input[required='required']").keyup(checkRequired);
 	}
 })
 
@@ -195,6 +195,16 @@ function changeFile()
 
  //check input field
  function checkRequired(event){
- 	var field=event.attr('id');
- 	alert($("upload-title[for='"+field.attr('id')+"']"));
+ 	var field=event.target;
+ 	var form=$(field).parent(".form-group");
+ 	if($(field).val()!="")
+ 	{
+ 		$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
+ 		$(form).addClass("has-success");
+ 	}
+ 	else
+ 	{
+ 		$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
+ 		$(form).addClass("has-warning");
+ 	}
  }

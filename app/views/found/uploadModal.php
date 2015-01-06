@@ -9,10 +9,10 @@
 				<div>
 					<img id="upload-photo-preview" src=""/>
 				</div>
-				<div id="upload-photo-text" class="form-group">
-					<input id="upload-title" type="text" class="form-control" placeholder="Title" autofocus required="required"><span class="glyphicon glyphicon-exclamation-sign" for="upload-title"></span><!--get username from database-->
-					<textarea id="upload-description" class="form-control" rows="3" placeholder="description"></textarea>
+				<div id="upload-photo-text" class="form-group has-success">
+					<input id="upload-title" type="text" class="form-control" placeholder="Title" autofocus required="required"><!--get username from database-->
 				</div>
+				<textarea id="upload-description" class="form-control" rows="3" placeholder="description"></textarea>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
