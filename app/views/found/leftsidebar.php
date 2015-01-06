@@ -1,5 +1,5 @@
 
-<div class="span4 navbar-leftside-expanded" style="height:100%">
+<div class="col-sm-4 navbar-leftside-expanded" style="height:100%;position:fixed">
 	<!--Navigator on left side-->
 	<div class="navbar-leftside">
 		<div class="navbar-leftside  navbar-expanded">
@@ -11,7 +11,7 @@
 		</div>
 	</div>
 	<!--theme image-->
-	<div class="span4 img-theme">
+	<div class="col-sm-12 img-theme">
 	</div>
 </div>
 
