@@ -1,4 +1,18 @@
 
+ $("document").ready(function(){
+ 	if($("#upload-file"))
+ 	{
+		$("#upload-file").change(changeFile);
+	}
+	if($("#upload-photo-text"))
+	{
+		$("#upload-photo-text > input[required='required']").keypress(checkRequired);
+	}
+})
+
+
+
+
  //resize the fixed navigation bar on top of content
 
 $(window).resize(function(){
@@ -135,11 +149,6 @@ function loadmore()
 }
 
 //upload files
-$("document").ready(function(){
-	$("#upload-file").change(function(){
-		changeFile();
-	});
-})
 
 function changeFile()
 {
@@ -181,4 +190,11 @@ function changeFile()
          var pic = document.getElementById("upload-photo-preview");
          pic.src=this.result;
      }
+ }
+ //.upload-file ends
+
+ //check input field
+ function checkRequired(event){
+ 	var field=event.attr('id');
+ 	alert($("upload-title[for='"+field.attr('id')+"']"));
  }
