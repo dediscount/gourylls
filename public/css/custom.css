@@ -112,6 +112,12 @@ alternative color:#F39C12;
 	width: 60px;
 	height: 60px;
 }
+.navbar-login
+{
+	position: fixed;
+	right: 20px;
+	top: 20px;
+}
 .navbar-top
 {
 
@@ -123,6 +129,22 @@ alternative color:#F39C12;
 .navbar-user
 {
 	height:75px;
+}
+#upload-photo-preview
+{
+	max-width: 70%;
+	margin-bottom: 30px;
+}
+#upload-title
+{
+	width: 50%;
+	height: 40px;
+	font-size: 20px;
+	margin-bottom: 15px;
+}
+#upload-description
+{
+
 }
 .navbar-mypage
 {
@@ -535,6 +557,16 @@ User page:
 	width:100%;
 	height:170px;
 }
+.photo-detail-footer .description
+	width: 80%;
+	float: left;
+	word-wrap:break-word;
+	word-break:normal;
+}
+.photo-detail-footer span
+{
+	color:gray;
+}
 .alert
 {
 	color:#c9302c;
@@ -543,4 +575,15 @@ User page:
 {
 	padding-left: 30px;
 	font-size: 20px;
+}
+.like-list
+{
+	list-style-type: none;
+	padding-left: 0;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+.like-list li
+{
+	display: inline-block;
 }

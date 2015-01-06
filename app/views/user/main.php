@@ -85,7 +85,18 @@
 					</div>
 					<div class="photo-detail-photo" style="background-image:url('/gourylls/public/user/userid/photos/korean.jpg')">	
 					</div>
-					<div>Description</div>
+					<div class="photo-detail-footer">
+						<span class="description">Description</span>
+						<span class="pull-right">1 day ago</span>
+					</div>
+					<div>
+						
+						<ul class="like-list">
+							<li><span class="glyphicon glyphicon-heart found-photo-footer-heart-full"></span></li>
+							<li><a href="#">user1</a></li>
+							<li><a href="#">user2</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 

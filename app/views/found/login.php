@@ -16,7 +16,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default pull-left" data-dismiss="modal" data-toggle='modal' href='#signinModal'>Sign in</button>
+						<button type="button" class="btn btn-default pull-left" data-dismiss="modal" data-toggle='modal' href='#signinModal'>Sign in <span class="glyphicon glyphicon-chevron-right"></span></button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						<button type="submit" class="btn btn-hue">Log in</button>
 					</div>
@@ -47,7 +47,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default pull-left" data-toggle='modal' href='#loginModal'>Log in</button>
+						<button type="button" class="btn btn-default pull-left" data-toggle='modal' href='#loginModal'>Log in <span class="glyphicon glyphicon-chevron-right"></span></button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						<button type="submit" class="btn btn-hue">Sign in</button>
 					</div>

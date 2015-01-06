@@ -13,7 +13,7 @@
 				-->
 				<!--upload photo-->
 				<div class="glyphicon glyphicon-plus pull-right navbar-found-upload-icon navbar-found-upload">
-					<input type="file" class="input-hidden-upload" accept="image/*">
+					<input id="upload-file" type="file" class="input-hidden-upload" accept="image/*">
 				</div>
 			</ul>
 		</div>
