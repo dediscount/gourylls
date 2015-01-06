@@ -1,5 +1,5 @@
 
-	<div id="found-content" class="span8 found-expanded">
+	<div id="found-content" class="col-sm-7 col-sm-offset-4 found-expanded">
 		<!--The navigation bar on the top-->
 		<div id="found-content-nav" class="navbar-top navbar-found " style="margin:0;">
 			<ul class="nav navbar-nav navbar-top-ul navbar-found-ul">

@@ -1,5 +1,5 @@
 <div id="container" class="container-found">
-	<div class="row" style="height:100%;width:100%">
+	<div class="row-fluid" style="height:100%;width:100%">
 	<?php
 	require_once('leftsidebar.php');
 	require_once('main.php');
