@@ -5,10 +5,12 @@ $("document").ready(function () {
     {
         $("#upload-file").change(changeFile);
     }
+    /**
     if ($("#upload-photo-text"))
     {
         $("#upload-photo-text > input[required='required']").keyup(checkRequired);
     }
+    **/
 });
 
 
