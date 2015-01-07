@@ -7,7 +7,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
 					<h4 class="modal-title">Log in</h4>
 				</div>
-				<form class="" onsubmit="" action="/gourylls/login" method="POST" role="form">
+				<form class="" onsubmit="return login();"  method="POST" role="form">
 					<div class="modal-body">
 						<div class="input-group-login">
 							<div class="form-group has-feedback">

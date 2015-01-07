@@ -126,6 +126,12 @@ function checkload()
     }
 }
 
+function login()
+{
+    alert("a");
+    return false;
+}
+
 function loadmore()
 {
 
