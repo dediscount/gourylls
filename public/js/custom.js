@@ -8,6 +8,10 @@
 	{
 		$("#upload-photo-text > input[required='required']").keyup(checkRequired);
 	}
+	if($("#inputInput-Password"))
+	{
+		$("#inputInput-Password").keyup(checkRequired);
+	}
 })
 
 
@@ -196,15 +200,62 @@ function changeFile()
  //check input field
  function checkRequired(event){
  	var field=event.target;
- 	var form=$(field).parent(".form-group");
  	if($(field).val()!="")
  	{
- 		$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
- 		$(form).addClass("has-success");
+ 		showSuccess(field);
  	}
  	else
  	{
- 		$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
- 		$(form).addClass("has-warning");
+ 		clearSign(field);
  	}
  }
+
+
+
+ //input field styles
+ function clearSign(event)
+ {
+ 	var field=event;
+ 	var form=$(field).parent(".form-group");
+ 	$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
+ 	if($(field).siblings(".form-control-feedback").length)
+ 	{
+ 		$(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove");
+ 	}
+ }
+ function showError(event)
+ {
+ 	var field=event;
+ 	var form=$(field).parent(".form-group");
+ 	$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
+ 	$(form).addClass("has-error");
+ 	if($(field).siblings(".form-control-feedback").length)
+ 	{
+ 		$(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove").addClass("glyphicon-remove");
+ 	}
+ }
+
+ function showWarning(event)
+ {
+ 	var field=event;
+ 	var form=$(field).parent(".form-group");
+ 	$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
+ 	$(form).addClass("has-warning");
+ 	if($(field).siblings(".form-control-feedback").length)
+ 	{
+ 		$(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove").addClass("glyphicon-warning-sign");
+ 	}
+ }
+
+ function showSuccess(event)
+ {
+ 	var field=event;
+ 	var form=$(field).parent(".form-group");
+ 	$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
+ 	$(form).addClass("has-success");
+ 	if($(field).siblings(".form-control-feedback").length)
+ 	{
+ 		$(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove").addClass("glyphicon-ok");
+ 	}
+ }
+//...input field styles end

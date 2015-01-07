@@ -30,8 +30,9 @@
 				<!--change username-->
 				<div id="user-info-change-name">
 					<form action="" method="POST" role="form">
-						<div class="form-group">
+						<div class="form-group has-feedback">
 							<input type="text" class="form-control" placeholder="Username"><!--get username from database-->
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 						</div>
 						<div class="form-footer">
 							<button type="button"  onclick="showEditForm('close')" class="btn btn-gray">Close</button>
@@ -43,10 +44,17 @@
 				<!--change password-->
 				<div id="user-info-change-pw">
 					<form action="" method="POST" role="form">
-						<div class="form-group">
+						<div class="form-group has-feedback">
 							<input type="password" class="form-control" placeholder="Old Password">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+						</div>
+						<div class="form-group has-feedback">
 							<input type="password" class="form-control" placeholder="New Password">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+						</div>
+						<div class="form-group has-feedback">
 							<input type="password" class="form-control" placeholder="New Password again">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 						</div>
 						<div class="form-footer">
 							<button type="button" onclick="showEditForm('close')" class="btn btn-gray">Close</button>

@@ -6,7 +6,16 @@
 	</a>
 	
 	<!--display when logined-->
-	<a class="logined">
+	<a class="logined dropdown-toggle" data-toggle="dropdown">
 		<img src="../user/userid/userid_icon.png" class="img-circle navbar-user-icon" title="Go to my page">
+		<span class="caret"></span>
 	</a>
+	<ul class="dropdown-menu" role="menu">
+		<li>
+			<a href="#">My Page</a>
+		</li>
+		<li>
+			<a href="#">Log out</a>
+		</li>
+	</ul>
 </div>

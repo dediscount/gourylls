@@ -10,11 +10,15 @@
 				<form class="" onsubmit="" action="/gourylls/login" method="POST" role="form">
 					<div class="modal-body">
 						<div class="input-group-login">
-
-							<input type="text" name="input-account" id="inputInput-Account" class="form-control" placeholder="Enter your account..." required="required"  title="Enter your account">
-
+							<div class="form-group has-feedback">
+							<input type="text" name="input-account" id="inputInput-Account" class="form-control" placeholder="Enter your email..." required="required"  pattern="^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+" title="Enter your account">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							</div>
 							<br/>
-							<input type="password" name="input-password" id="inputInput-Password" class="form-control" placeholder="Enter your password..." required="required" title="Enter your password...">
+							<div class="form-group has-feedback">
+								<input type="password" name="input-password" id="inputInput-Password" class="form-control" placeholder="Enter your password..." required="required" title="Enter your password...">
+								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -38,14 +42,25 @@
 				<form class="" onsubmit="#" action="" method="POST" role="form">
 					<div class="modal-body">
 						<div class="input-group-signin">
-							<input type="text" name="input-account" id="signin-Account" class="form-control" placeholder="Email..." required="required" pattern="" title="Enter your email...">
+							<div class="form-group has-feedback">
+								<input type="text" name="input-account" id="signin-Account" class="form-control" placeholder="Email..." required="required" pattern="^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$" title="Invalid email address">
+								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							</div>
 							<br/>
-							<input type="text" name="input-account" id="signin-Username" class="form-control" placeholder="Name..." required="required" pattern="" title="Enter your name">
+							<div class="form-group has-feedback">
+								<input type="text" name="input-account" id="signin-Username" class="form-control" placeholder="Name..." required="required" pattern="[0-9a-zA-Z_]+" title="Only 0-9, a-z, A-Z and _ are valid">
+								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							</div>
 							<br/>
-							<input type="password" name="input-password" id="signin-Password" class="form-control" placeholder="Password..." required="required" title="Enter your password...">
+							<div class="form-group has-feedback">
+								<input type="password" name="input-password" id="signin-Password" class="form-control" placeholder="Password..." required="required" pattern=".{6-20}" title="6 to 20 characters are allowed">
+								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							</div>
 							<br/>
-							<input type="password" name="input-password" id="signin-Password-confirm" class="form-control" placeholder="Password again..." required="required" title="Enter your password...">
-						
+							<div class="form-group has-feedback">
+								<input type="password" name="input-password" id="signin-Password-confirm" class="form-control" placeholder="Password again..." required="required" pattern=".{6-20}" title="6 to 20 characters are allowed">
+								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
