@@ -33,13 +33,13 @@ class App {
         $this->params = $url ? array_values($url) : [];
         call_user_func_array([$this->controller, $this->method], $this->params);
         //session_start();
-        if (isset($_COOKIE["PHPSESSID"])) {
-            $k = $_COOKIE["PHPSESSID"];
-            $token = strtok($k, "-");
-            echo "$token";
-            $token = strtok("-");
-            echo "$token";
-        }
+//        if (isset($_COOKIE["PHPSESSID"])) {
+//            $k = $_COOKIE["PHPSESSID"];
+//            $token = strtok($k, "-");
+//            echo "$token";
+//            $token = strtok("-");
+//            echo "$token";
+//        }
     }
 
     private function parseUrl() {

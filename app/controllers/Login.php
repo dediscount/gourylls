@@ -23,7 +23,7 @@ class Login extends Controller {
             } else {
                 
                 echo "You are logged in.";                
-                setcookie(session_name(), $account, time() + 24 * 3600, "/");
+                //setcookie(session_name(), $account, time() + 24 * 3600, "/");
                 $_SESSION["account"] = $account;
                 for ($i = 0; $i < ($result->num_rows); $i++) {
                     $result->data_seek($i);

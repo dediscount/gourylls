@@ -1,0 +1,10 @@
+CREATE TABLE advice
+(
+    ID int NOT NULL AUTO_INCREMENT,
+    userID int NOT NULL,
+    content varchar(255) NOT NULL,
+    advice_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(ID),
+    PRIMARY KEY(ID),
+    FOREIGN KEY(userID) REFERENCES user(ID)
+ );
