@@ -221,5 +221,52 @@ function checkRequired(event) {
         $(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
         $(form).addClass("has-warning");
     }
-}
+} 
+//input field styles
+ function clearSign(event)
+ {
+ 	var field=event;
+ 	var form=$(field).parent(".form-group");
+ 	$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
+ 	if($(field).siblings(".form-control-feedback").length)
+ 	{
+ 		$(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove");
+ 	}
+ }
+ function showError(event)
+ {
+ 	var field=event;
+ 	var form=$(field).parent(".form-group");
+ 	$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
+ 	$(form).addClass("has-error");
+ 	if($(field).siblings(".form-control-feedback").length)
+ 	{
+ 		$(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove").addClass("glyphicon-remove");
+ 	}
+ }
+
+ function showWarning(event)
+ {
+ 	var field=event;
+ 	var form=$(field).parent(".form-group");
+ 	$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
+ 	$(form).addClass("has-warning");
+ 	if($(field).siblings(".form-control-feedback").length)
+ 	{
+ 		$(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove").addClass("glyphicon-warning-sign");
+ 	}
+ }
+
+ function showSuccess(event)
+ {
+ 	var field=event;
+ 	var form=$(field).parent(".form-group");
+ 	$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
+ 	$(form).addClass("has-success");
+ 	if($(field).siblings(".form-control-feedback").length)
+ 	{
+ 		$(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove").addClass("glyphicon-ok");
+ 	}
+ }
+//...input field styles end
 
