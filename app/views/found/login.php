@@ -11,7 +11,7 @@
 					<div class="modal-body">
 						<div class="input-group-login">
 							<div class="form-group has-feedback">
-							<input type="text" name="input-account" id="inputInput-Account" class="form-control" placeholder="Enter your email..." required="required"  pattern="^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+" title="Enter your account">
+							<input type="text" name="input-account" id="inputInput-Account" class="form-control" placeholder="Enter your email..." required="required"   title="Enter your account"><!--pattern="^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+"-->
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 							</div>
 							<br/>
