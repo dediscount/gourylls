@@ -1,4 +1,4 @@
-﻿
+
 
 $("document").ready(function () {
     if ($("#upload-file"))
@@ -128,7 +128,53 @@ function checkload()
 
 function login()
 {
-    alert("a");
+    clearSign($("#inputInput-Account"));
+    clearSign($("#inputInput-Password"));
+    var account=$("#inputInput-Account").val();
+    //alert(account);
+    var password=$("#inputInput-Password").val();
+    //alert(password);
+    //showError($("#inputInput-Account"));
+    $.ajax({
+        // The URL for the request
+        url: "/gourylls/login",
+        // The data to send (will be converted to a query string)
+        data: { account: account, password: password },
+        // Whether this is a POST or GET request
+        type: "POST",
+        // The type of data we expect back
+        dataType: "text",
+        // Code to run if the request succeeds;
+        // the response is passed to the function
+        success: function (data) {
+            
+            data=parseInt(data);
+            if(data==0)
+            {
+                //alert(typeof(data));
+                showError($("#inputInput-Account"));
+                showError($("#inputInput-Password"));
+                return;
+            }
+            if(data==1)
+            {
+                window.location ="/gourylls/found";
+            }
+            
+            
+            
+        },
+        // Code to run if the request fails; the raw request and
+        // status codes are passed to the function
+        error: function (xhr, status, errorThrown) {
+            alert("Sorry, there was a problem!");
+            console.log("Error: " + errorThrown);
+            console.log("Status: " + status);
+            console.dir(xhr);
+        }
+        // Code to run regardless of success or failure
+
+    });
     return false;
 }
 

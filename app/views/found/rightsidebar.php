@@ -6,7 +6,7 @@
         ?>
     <!--display when logined-->
         <a class="logined dropdown-toggle" data-toggle="dropdown">
-			<img src="../user/userid/userid_icon.png" class="img-circle navbar-user-icon" title="Go to my page">
+			<img src="/gourylls/public/user/userid/userid_icon.png" class="img-circle navbar-user-icon" title="Go to my page">
 			<span class="caret"></span>
 		</a>
 		<ul class="dropdown-menu" role="menu">
@@ -14,7 +14,7 @@
 				<a href="#">My Page</a>
 			</li>
 			<li>
-				<a href="#">Log out</a>
+				<a href="/gourylls/logout">Log out</a>
 			</li>
 		</ul>
         

@@ -6,39 +6,44 @@ class Login extends Controller {
     private $username = "root";
     private $password = "";
     public function index() {//index function !!!!!!
+        
         $conn = new mysqli($this->servername, $this->username, $this->password);
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        echo $_POST["input-account"] . "<br/>";
-        echo $_POST["input-password"];
-        $account = $_POST["input-account"];
-        $password = $_POST["input-password"];
+        //echo $_POST["account"] . "<br/>";
+        //echo $_POST["password"];
+        $account = $_POST["account"];
+        $password = $_POST["password"];
 
         $sql = "select * from gourylls.user where account='" . $account . "' and password='" . $password . "';";
 
         if ($result = $conn->query($sql)) {
             if ($result->num_rows === 0) {
-                echo "Wrong account or passwords.";
+                echo "0";
             } else {
-                
-                echo "You are logged in.";                
-                //setcookie(session_name(), $account, time() + 24 * 3600, "/");
                 $_SESSION["account"] = $account;
-                for ($i = 0; $i < ($result->num_rows); $i++) {
-                    $result->data_seek($i);
-                    $row = $result->fetch_assoc();
-                    foreach ($row as $x => $x_value) {
-                        echo "Key=" . $x . ", Value=" . $x_value;
-                        echo "<br>";
-                    }
-                    echo "<br>";
-                }
+                echo "1";
             }
         }
-        if (isset($_SESSION["account"])) {
-            echo "hehe";
-        }
+
+//                echo "You are logged in.";                
+//                //setcookie(session_name(), $account, time() + 24 * 3600, "/");
+//                $_SESSION["account"] = $account;
+//                for ($i = 0; $i < ($result->num_rows); $i++) {
+//                    $result->data_seek($i);
+//                    $row = $result->fetch_assoc();
+//                    foreach ($row as $x => $x_value) {
+//                        echo "Key=" . $x . ", Value=" . $x_value;
+//                        echo "<br>";
+//                    }
+//                    echo "<br>";
+//                }
+//            }
+//        }
+//        if (isset($_SESSION["account"])) {
+//            echo "hehe";
+//        }
         //echo "<script>window.location =\"/gourylls/found\";</script>";
 //        for ($i = 0; $i < ($result->num_rows); $i++) {
 //            $result->data_seek($i);
