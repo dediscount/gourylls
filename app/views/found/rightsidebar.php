@@ -11,7 +11,7 @@
 		</a>
 		<ul class="dropdown-menu" role="menu">
 			<li>
-				<a href="/gourylls/user">My Page</a>
+				<a href="/gourylls/user">My page</a>
 			</li>
 			<li>
 				<a href="/gourylls/logout">Log out</a>

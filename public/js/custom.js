@@ -160,7 +160,7 @@ function login()
             data=parseInt(data);
             if(data==0)
             {
-                //alert(typeof(data));
+                alert(data);
                 showError($("#inputInput-Account"));
                 showError($("#inputInput-Password"));
                 $("#inputInput-Password").val("");
@@ -170,6 +170,67 @@ function login()
             if(data==1)
             {
                 window.location ="/gourylls/found";
+            }
+            
+            
+            
+        },
+        // Code to run if the request fails; the raw request and
+        // status codes are passed to the function
+        error: function (xhr, status, errorThrown) {
+            alert("Sorry, there was a problem!");
+            console.log("Error: " + errorThrown);
+            console.log("Status: " + status);
+            console.dir(xhr);
+        }
+        // Code to run regardless of success or failure
+
+    });
+    return false;
+}
+
+function signin()
+{
+//    clearSign($("#inputInput-Account"));
+//    clearSign($("#inputInput-Password"));
+    var account=$("#signin-Account").val();
+    var name=$("#signin-Username").val();
+    var password_1=$("#signin-Password").val();
+    var password_2=$("#signin-Password-confirm").val();
+
+    $.ajax({
+        // The URL for the request
+        url: "/gourylls/signin",
+        // The data to send (will be converted to a query string)
+        data: { account: account, name: name, password_1:password_1,password_2:password_2 },
+        // Whether this is a POST or GET request
+        type: "POST",
+        // The type of data we expect back
+        dataType: "text",
+        // Code to run if the request succeeds;
+        // the response is passed to the function
+        success: function (data) {
+            
+            data=parseInt(data);
+            alert(data);
+            if(data==1)
+            {
+                //alert(typeof(data));
+                showError($("#signin-Account"));
+            }else if(data==2)
+            {
+                showError($("#signin-Username"));
+            }else if(data==3)
+            {
+                showError($("#signin-Password"));
+                showError($("#signin-Password-confirm"));
+            }else if(data==0)
+            {
+                window.location ="/gourylls/found";
+            }
+            else
+            {
+                window.location ="/gourylls";
             }
             
             
