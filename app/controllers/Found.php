@@ -8,7 +8,7 @@ class Found extends Controller
 		//$user->name=$firstName.' '.$lastName;
 		//echo $user->name;
 		//$this->view('home/index',['name'=>$user->name]);
-		$this->view('found/index');
+		$this->view('found/index',['account' => 'test']);
                 //$this->view('found/index',$user);
 	}
 }?>

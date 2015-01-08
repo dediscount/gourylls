@@ -5,6 +5,7 @@
         
         ?>
     <!--display when logined-->
+
 	    <div class="dropdown">
 	        <a id="dropdownMenu1" class="logined dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 				<img src="/gourylls/public/user/userid/userid_icon.png" class="img-circle navbar-user-icon" title="Go to my page">
@@ -19,6 +20,7 @@
 				</li>
 			</ul>
 	    </div>
+
         <?php
     } else {
         ?>

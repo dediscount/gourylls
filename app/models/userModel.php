@@ -1,10 +1,12 @@
 <?php
-class User
+class UserModel
 {
-    public $account;
+    
     public function __construct() {
         //$this->account=account;
     }
+    
+            
     
     
     

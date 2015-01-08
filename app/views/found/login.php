@@ -39,7 +39,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
 					<h4 class="modal-title">Sign in</h4>
 				</div>
-				<form class="" onsubmit="#" action="" method="POST" role="form">
+				<form class="" onsubmit="return signin();" method="POST" role="form">
 					<div class="modal-body">
 						<div class="input-group-signin">
 							<div class="form-group has-feedback">
@@ -53,12 +53,12 @@
 							</div>
 							<br/>
 							<div class="form-group has-feedback">
-								<input type="password" name="input-password" id="signin-Password" class="form-control" placeholder="Password..." required="required" pattern=".{6-20}" title="6 to 20 characters are allowed">
+								<input type="password" name="input-password" id="signin-Password" class="form-control" placeholder="Password..." required="required" pattern=".{6,20}" title="6 to 20 characters are allowed">
 								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 							</div>
 							<br/>
 							<div class="form-group has-feedback">
-								<input type="password" name="input-password" id="signin-Password-confirm" class="form-control" placeholder="Password again..." required="required" pattern=".{6-20}" title="6 to 20 characters are allowed">
+								<input type="password" name="input-password" id="signin-Password-confirm" class="form-control" placeholder="Password again..." required="required" pattern=".{6,20}" title="6 to 20 characters are allowed">
 								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 							</div>
 						</div>
@@ -66,7 +66,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default pull-left" data-dismiss="modal" data-toggle='modal' href='#loginModal'>Log in <span class="glyphicon glyphicon-chevron-right"></span></button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-hue">Sign in</button>
+						<button type="submit" id="found_button_signin"class="btn btn-hue">Sign in</button>
 					</div>
 				</form>
 			</div><!-- /.modal-content -->

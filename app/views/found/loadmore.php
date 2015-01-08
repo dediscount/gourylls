@@ -1,4 +1,4 @@
-			<div id="photoid" class="found-photo-container"><!--iterate this container to display more photos-->
+<div id="photoid" class="found-photo-container"><!--iterate this container to display more photos-->
 				<div class="found-photo-head">
 					<h1 class="found-photo-title">Title</h1>
 					<a class="found-photo-user" href="#"><img src="/gourylls/public/user/userid/userid_icon.png" class="img-circle found-photo-user-icon" title="username"></a>

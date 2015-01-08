@@ -1,22 +1,18 @@
 <?php
-class Controller
-{
-	public function model($model)
-	{
-		require_once '/../models/'.$model.'.php';
-		return new $model();
-	}
-	public function view($view, $data='')
-	{
-//            if($data==='')
-//            {
-//                echo "empty";
-//            }
-		//echo '../app/views/'.$view.'.php';
-		require_once '/../views/'.$view.'.php';
-		//return new $view();	NO INSTANCE!!!!!!!!
-	}
-	
-	
-	
+
+class Controller {
+
+    public function model($model) {
+        $model = $model . "Model";
+        require_once '/../models/' . $model . '.php';
+        return new $model();
+    }
+    public function view($view, $data = []) {
+        //var_dump($data);
+            
+        
+        require_once '/../views/' . $view . '.php';
+        
+        
+    }
 }
