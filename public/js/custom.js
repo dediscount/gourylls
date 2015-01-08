@@ -5,12 +5,21 @@ $("document").ready(function () {
     {
         $("#upload-file").change(changeFile);
     }
-    /**
-    if ($("#upload-photo-text"))
+    
+    //clear the signs when input login information
+    if ($("#inputInput-Account"))
     {
-        $("#upload-photo-text > input[required='required']").keyup(checkRequired);
+        $("#inputInput-Account").keyup(function(){
+        	clearSign($("#inputInput-Account"));
+        	clearSign($("#inputInput-Password"));
+        });
+        $("#inputInput-Password").keyup(function(){
+        	clearSign($("#inputInput-Account"));
+        	clearSign($("#inputInput-Password"));
+        });
     }
-    **/
+
+
 });
 
 
@@ -154,6 +163,8 @@ function login()
                 //alert(typeof(data));
                 showError($("#inputInput-Account"));
                 showError($("#inputInput-Password"));
+                $("#inputInput-Password").val("");
+                $("#inputInput-Password").focus();
                 return;
             }
             if(data==1)
