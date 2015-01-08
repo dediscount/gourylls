@@ -384,6 +384,13 @@ alternative color:#F39C12;
 {
 	color:#222;
 }
+.logined,
+.logined:hover
+{
+	display: block;
+	text-decoration: none;
+	cursor: pointer;
+}
 
 .input-group-login,
 .input-group-signin
