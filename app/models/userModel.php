@@ -33,7 +33,7 @@ class UserModel extends Model {
     }
 
     public function changeName($account, $name) {
-        if ($this->name === $name || $this->account != $account || strlen($name) < 6) {
+        if ($this->name === $name || $this->account != $account || strlen($name) < 1) {
             return false;
         } else {
             $sql = "update gourylls.user set name='" . $name . "' where account='" . $this->account . "';";

@@ -6,4 +6,7 @@
 	require_once('rightsidebar.php');
 	?>
 	</div>
+	<?php
+		require_once('uploadModal.php');
+	?>
 </div>

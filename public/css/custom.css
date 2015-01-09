@@ -603,9 +603,9 @@ User page:
 .photo-detail-footer .description
 {
 	width: 80%;
-	float: left;
 	word-wrap:break-word;
 	word-break:normal;
+	color: black;
 }
 .photo-detail-footer span
 {

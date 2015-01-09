@@ -13,7 +13,7 @@
 				-->
 				<!--upload photo-->
 				<div class="glyphicon glyphicon-plus pull-right navbar-found-upload-icon navbar-found-upload">
-					<input type="file" class="input-hidden-upload" accept="image/*">
+					<input id="upload-file" type="file" class="input-hidden-upload" accept="image/*">
 				</div>
 			</ul>
 		</div>	
@@ -56,7 +56,7 @@
 				<div id="user-info-change-name">
 					<form onsubmit="return changeName()" method="POST" role="form">
 						<div class="form-group has-feedback">
-                                                    <input type="text" id="user_userName"class="form-control" placeholder="<?=$data['name']?>"><!--get username from database-->
+                                                    <input type="text" id="user_userName"class="form-control"  pattern=".{1,20}" required="required" placeholder="<?=$data['name']?>" title="User name must be 1 to 20 characters"><!--get username from database-->
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 						</div>
 						<div class="form-footer">
@@ -70,15 +70,15 @@
 				<div id="user-info-change-pw">
                                     <form onsubmit="return changePassword()"method="POST" role="form">
 						<div class="form-group has-feedback">
-							<input type="password" id="user_oldPassword" class="form-control" placeholder="Old Password">
+							<input type="password" id="user_oldPassword" class="form-control" required pattern=".{6,20}" placeholder="Old Password" title="The length of password should 6 to 20">
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 						</div>
 						<div class="form-group has-feedback">
-							<input type="password" id="user_newPassword_1" class="form-control" placeholder="New Password">
+							<input type="password" id="user_newPassword_1" class="form-control" required pattern=".{6,20}" placeholder="New Password" title="The length of password should 6 to 20">
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 						</div>
 						<div class="form-group has-feedback">
-							<input type="password" id="user_newPassword_2" class="form-control" placeholder="New Password again">
+							<input type="password" id="user_newPassword_2" class="form-control" required pattern=".{6,20}" placeholder="New Password again" title="The length of password should 6 to 20">
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 						</div>
 						<div class="form-footer">
