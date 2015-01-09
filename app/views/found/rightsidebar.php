@@ -5,22 +5,22 @@
         
         ?>
     <!--display when logined-->
-        <a class="logined dropdown-toggle" data-toggle="dropdown">
-			<img src="/gourylls/public/user/userid/userid_icon.png" class="img-circle navbar-user-icon" title="Go to my page">
-			<span class="caret"></span>
-		</a>
-		<ul class="dropdown-menu" role="menu">
-                        <li>
-				<a><?=$data['account']?></a>
-			</li>
-			<li>
-				<a href="/gourylls/user">My page</a>
-			</li>
-			<li>
-				<a href="/gourylls/logout">Log out</a>
-			</li>
-		</ul>
-        
+
+
+	    <div class="dropdown">
+	        <a id="dropdownMenu1" class="logined dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+				<img src="/gourylls/public/user/userid/userid_icon.png" class="img-circle navbar-user-icon" title="Go to my page">
+				<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
+				<li role="presentation">
+					<a href="/gourylls/user" role="menuitem" tabindex="-1">My Page</a>
+				</li>
+				<li>
+					<a href="/gourylls/logout" role="menuitem" tabindex="-1">Log out</a>
+				</li>
+			</ul>
+	    </div>
         <?php
     } else {
         ?>
