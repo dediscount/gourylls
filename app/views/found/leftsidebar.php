@@ -3,7 +3,7 @@
 	<!--Navigator on left side-->
 	<div class="navbar-leftside">
 		<div class="navbar-leftside  navbar-expanded">
-			<a href="../" class="logo-link">
+			<a href="/gourylls" class="logo-link">
 				<div class="active logo " role="button"><!--reload when clicked-->
 					<span><b>食</b></span>
 				</div>
@@ -16,7 +16,7 @@
 </div>
 
 <div class="navbar-leftside navbar-shrink" style="height:75px">
-	<a href="../" class="logo-link">
+	<a href="/gourylls" class="logo-link">
 		<div class="active logo" role="button" href="#">
 			<span><b>食</b></span>
 		</div>

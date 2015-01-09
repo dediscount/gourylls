@@ -37,14 +37,26 @@
 				
 				<!--display when not editting-->
 				<div id="user-info-name">
-					<h2>Username</h2>
+					<h2>
+                                        <?php                                        
+                                        if($data['name']=='')
+                                        {
+                                            echo "Default User";
+                                        }
+                                        else
+                                        {
+                                            echo $data['name'];
+                                        }
+                                        ?>
+                                        
+                                        </h2>
 				</div>
 
 				<!--change username-->
 				<div id="user-info-change-name">
-					<form action="" method="POST" role="form">
+					<form onsubmit="return changeName()" method="POST" role="form">
 						<div class="form-group has-feedback">
-							<input type="text" class="form-control" placeholder="Username"><!--get username from database-->
+                                                    <input type="text" id="user_userName"class="form-control" placeholder="<?=$data['name']?>"><!--get username from database-->
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 						</div>
 						<div class="form-footer">
@@ -56,17 +68,17 @@
 				</div>
 				<!--change password-->
 				<div id="user-info-change-pw">
-					<form action="" method="POST" role="form">
+                                    <form onsubmit="return changePassword()"method="POST" role="form">
 						<div class="form-group has-feedback">
-							<input type="password" class="form-control" placeholder="Old Password">
+							<input type="password" id="user_oldPassword" class="form-control" placeholder="Old Password">
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 						</div>
 						<div class="form-group has-feedback">
-							<input type="password" class="form-control" placeholder="New Password">
+							<input type="password" id="user_newPassword_1" class="form-control" placeholder="New Password">
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 						</div>
 						<div class="form-group has-feedback">
-							<input type="password" class="form-control" placeholder="New Password again">
+							<input type="password" id="user_newPassword_2" class="form-control" placeholder="New Password again">
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 						</div>
 						<div class="form-footer">
@@ -78,7 +90,14 @@
 				</div>
 
 				<div id="user-info-edit-a"><!--display only when username matches-->
+                                    <?php
+                                    if($this->isLoggedIn())
+                                    {
+                                    ?>
 					<a href="#" onclick="showEditForm('changeName')">edit my profile</a>
+                                        <?php
+                                    }
+                                        ?>
 				</div>
 
 				<div class="user-info-stats">
