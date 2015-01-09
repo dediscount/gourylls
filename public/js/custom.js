@@ -1,30 +1,22 @@
-
-
 $("document").ready(function () {
     if ($("#upload-file"))
     {
         $("#upload-file").change(changeFile);
     }
-    
+
     //clear the signs when input login information
     if ($("#inputInput-Account"))
     {
-        $("#inputInput-Account").keyup(function(){
-        	clearSign($("#inputInput-Account"));
-        	clearSign($("#inputInput-Password"));
+        $("#inputInput-Account").keyup(function () {
+            clearSign($("#inputInput-Account"));
+            clearSign($("#inputInput-Password"));
         });
-        $("#inputInput-Password").keyup(function(){
-        	clearSign($("#inputInput-Account"));
-        	clearSign($("#inputInput-Password"));
+        $("#inputInput-Password").keyup(function () {
+            clearSign($("#inputInput-Account"));
+            clearSign($("#inputInput-Password"));
         });
     }
-
-
 });
-
-
-
-
 
 //resize the fixed navigation bar on top of content
 
@@ -139,16 +131,16 @@ function login()
 {
     clearSign($("#inputInput-Account"));
     clearSign($("#inputInput-Password"));
-    var account=$("#inputInput-Account").val();
+    var account = $("#inputInput-Account").val();
     //alert(account);
-    var password=$("#inputInput-Password").val();
+    var password = $("#inputInput-Password").val();
     //alert(password);
     //showError($("#inputInput-Account"));
     $.ajax({
         // The URL for the request
         url: "/gourylls/login",
         // The data to send (will be converted to a query string)
-        data: { account: account, password: password },
+        data: {account: account, password: password},
         // Whether this is a POST or GET request
         type: "POST",
         // The type of data we expect back
@@ -156,24 +148,19 @@ function login()
         // Code to run if the request succeeds;
         // the response is passed to the function
         success: function (data) {
-            
-            data=parseInt(data);
-            if(data==0)
+            data = parseInt(data);
+            if (data == 1)
             {
-                alert(data);
                 showError($("#inputInput-Account"));
                 showError($("#inputInput-Password"));
                 $("#inputInput-Password").val("");
                 $("#inputInput-Password").focus();
                 return;
             }
-            if(data==1)
+            if (data == 0)
             {
-                window.location ="/gourylls/found";
+                window.location = "/gourylls/found";
             }
-            
-            
-            
         },
         // Code to run if the request fails; the raw request and
         // status codes are passed to the function
@@ -184,7 +171,6 @@ function login()
             console.dir(xhr);
         }
         // Code to run regardless of success or failure
-
     });
     return false;
 }
@@ -193,16 +179,16 @@ function signin()
 {
 //    clearSign($("#inputInput-Account"));
 //    clearSign($("#inputInput-Password"));
-    var account=$("#signin-Account").val();
-    var name=$("#signin-Username").val();
-    var password_1=$("#signin-Password").val();
-    var password_2=$("#signin-Password-confirm").val();
+    var account = $("#signin-Account").val();
+    var name = $("#signin-Username").val();
+    var password_1 = $("#signin-Password").val();
+    var password_2 = $("#signin-Password-confirm").val();
 
     $.ajax({
         // The URL for the request
         url: "/gourylls/signin",
         // The data to send (will be converted to a query string)
-        data: { account: account, name: name, password_1:password_1,password_2:password_2 },
+        data: {account: account, name: name, password_1: password_1, password_2: password_2},
         // Whether this is a POST or GET request
         type: "POST",
         // The type of data we expect back
@@ -210,31 +196,28 @@ function signin()
         // Code to run if the request succeeds;
         // the response is passed to the function
         success: function (data) {
-            
-            data=parseInt(data);
+
+            data = parseInt(data);
             alert(data);
-            if(data==1)
+            if (data == 1)
             {
                 //alert(typeof(data));
                 showError($("#signin-Account"));
-            }else if(data==2)
+            } else if (data == 2)
             {
                 showError($("#signin-Username"));
-            }else if(data==3)
+            } else if (data == 3)
             {
                 showError($("#signin-Password"));
                 showError($("#signin-Password-confirm"));
-            }else if(data==0)
+            } else if (data == 0)
             {
-                window.location ="/gourylls/found";
+                window.location = "/gourylls/found";
             }
             else
             {
-                window.location ="/gourylls";
+                window.location = "/gourylls";
             }
-            
-            
-            
         },
         // Code to run if the request fails; the raw request and
         // status codes are passed to the function
@@ -280,11 +263,105 @@ function loadmore()
 
     });
 
-//    $.get("/gourylls/app/views/found/loadmore.php", function (response) {
-//        $("#loadmore").before(response);
-//    });
-
 }
+
+//change user name
+function changeName()
+{
+    var name = $("#user_userName").val();
+    $.ajax({
+        // The URL for the request
+        url: "/gourylls/user/changename",
+        // The data to send (will be converted to a query string)
+        data: {name: name},
+        // Whether this is a POST or GET request
+        type: "POST",
+        // The type of data we expect back
+        dataType: "text",
+        // Code to run if the request succeeds;
+        // the response is passed to the function
+        success: function (data) {
+            data = parseInt(data);
+            //alert(data);
+            if (data == 1)
+            {
+                showError($("user_userName"));
+            }
+            else if (data == 0)
+            {
+                window.location = "/gourylls/user";
+            }
+            else
+            {
+                window.location = "/gourylls";
+            }
+        },
+        // Code to run if the request fails; the raw request and
+        // status codes are passed to the function
+        error: function (xhr, status, errorThrown) {
+            alert("Sorry, there was a problem!");
+            console.log("Error: " + errorThrown);
+            console.log("Status: " + status);
+            console.dir(xhr);
+        }
+        // Code to run regardless of success or failure
+
+    });
+    return false;
+}
+
+//change password
+function changePassword()
+{
+    var oldPassword = $("#user_oldPassword").val();
+    var password_1 = $("#user_newPassword_1").val();
+    var password_2 = $("#user_newPassword_2").val();
+
+    $.ajax({
+        // The URL for the request
+        url: "/gourylls/user/changepassword",
+        // The data to send (will be converted to a query string)
+        data: {oldPassword: oldPassword, password_1: password_1, password_2: password_2},
+        // Whether this is a POST or GET request
+        type: "POST",
+        // The type of data we expect back
+        dataType: "text",
+        // Code to run if the request succeeds;
+        // the response is passed to the function
+        success: function (data) {
+            data = parseInt(data);
+            //alert(data);
+            if (data == 1)
+            {
+                //alert(typeof(data));
+                showError($("#user_oldPassword"));
+            } else if (data == 2)
+            {
+                showError($("#user_newPassword_1"));
+                showError($("#user_newPassword_2"));
+            } else if (data == 0)
+            {
+                window.location = "/gourylls/user";
+            }
+            else
+            {
+                window.location = "/gourylls";
+            }
+        },
+        // Code to run if the request fails; the raw request and
+        // status codes are passed to the function
+        error: function (xhr, status, errorThrown) {
+            alert("Sorry, there was a problem!");
+            console.log("Error: " + errorThrown);
+            console.log("Status: " + status);
+            console.dir(xhr);
+        }
+        // Code to run regardless of success or failure
+
+    });
+    return false;
+}
+
 
 //upload files
 
@@ -317,8 +394,6 @@ function changeFile()
     } else {
         html5Reader(file);
     }
-
-
 }
 ;
 
@@ -347,52 +422,52 @@ function checkRequired(event) {
         $(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
         $(form).addClass("has-warning");
     }
-} 
+}
 //input field styles
- function clearSign(event)
- {
- 	var field=event;
- 	var form=$(field).parent(".form-group");
- 	$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
- 	if($(field).siblings(".form-control-feedback").length)
- 	{
- 		$(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove");
- 	}
- }
- function showError(event)
- {
- 	var field=event;
- 	var form=$(field).parent(".form-group");
- 	$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
- 	$(form).addClass("has-error");
- 	if($(field).siblings(".form-control-feedback").length)
- 	{
- 		$(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove").addClass("glyphicon-remove");
- 	}
- }
+function clearSign(event)
+{
+    var field = event;
+    var form = $(field).parent(".form-group");
+    $(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
+    if ($(field).siblings(".form-control-feedback").length)
+    {
+        $(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove");
+    }
+}
+function showError(event)
+{
+    var field = event;
+    var form = $(field).parent(".form-group");
+    $(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
+    $(form).addClass("has-error");
+    if ($(field).siblings(".form-control-feedback").length)
+    {
+        $(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove").addClass("glyphicon-remove");
+    }
+}
 
- function showWarning(event)
- {
- 	var field=event;
- 	var form=$(field).parent(".form-group");
- 	$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
- 	$(form).addClass("has-warning");
- 	if($(field).siblings(".form-control-feedback").length)
- 	{
- 		$(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove").addClass("glyphicon-warning-sign");
- 	}
- }
+function showWarning(event)
+{
+    var field = event;
+    var form = $(field).parent(".form-group");
+    $(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
+    $(form).addClass("has-warning");
+    if ($(field).siblings(".form-control-feedback").length)
+    {
+        $(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove").addClass("glyphicon-warning-sign");
+    }
+}
 
- function showSuccess(event)
- {
- 	var field=event;
- 	var form=$(field).parent(".form-group");
- 	$(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
- 	$(form).addClass("has-success");
- 	if($(field).siblings(".form-control-feedback").length)
- 	{
- 		$(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove").addClass("glyphicon-ok");
- 	}
- }
+function showSuccess(event)
+{
+    var field = event;
+    var form = $(field).parent(".form-group");
+    $(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
+    $(form).addClass("has-success");
+    if ($(field).siblings(".form-control-feedback").length)
+    {
+        $(field).siblings(".form-control-feedback").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove").addClass("glyphicon-ok");
+    }
+}
 //...input field styles end
 

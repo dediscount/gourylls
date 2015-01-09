@@ -20,10 +20,10 @@ class Login extends Controller {
 
         if ($result = $conn->query($sql)) {
             if ($result->num_rows === 0) {
-                echo "0";
+                echo "1";
             } else {
                 $_SESSION["account"] = $account;
-                echo "1";
+                echo "0";
             }
         }
 
