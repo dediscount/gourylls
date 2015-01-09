@@ -1,11 +1,15 @@
 
-
+var iconCache;
 $("document").ready(function () {
+
     if ($("#upload-file"))
     {
         $("#upload-file").change(changeFile);
     }
-    
+    if ($("#upload-icon-container"))
+    {
+    	$("#upload-icon").change(function(){changeIcon();showEditForm("changeIcon")});
+    }
     //clear the signs when input login information
     if ($("#inputInput-Account"))
     {
@@ -33,6 +37,8 @@ $(window).resize(function () {
 });
 $(window).load(function () {
     sizeAdjustor();
+    if($("#user-info-icon-img").length)
+    iconCache=$("#user-info-icon-img").attr("src");
 });
 //adjust size when loading or windows changed
 function sizeAdjustor()
@@ -69,9 +75,10 @@ function sizeAdjustor()
 
 function showEditForm(event)
 {
-    if (event == "changeName" || event == "changePW" || event == "close")
+    if (event == "changeName" || event == "changePW" || event=="changeIcon" || event == "close")
     {
         $("#user-info-edit-a").css("display", "none");
+        $("#upload-icon-container").css("display","block");
         switch (event) {
             case "changeName":
                 $("#user-info-change-pw").css("display", "none");
@@ -83,11 +90,20 @@ function showEditForm(event)
                 $("#user-info-name").css("display", "block");
                 $("#user-info-change-name").css("display", "none");
                 break;
+            case "changeIcon":
+            	$("#user-info-change-pw").css("display", "none");
+                $("#user-info-name").css("display", "none");
+                $("#user-info-change-name").css("display", "none");
+                $("#user-info-icon-footer").css("display","block");
+                break;
             case "close":
                 $("#user-info-change-pw").css("display", "none");
                 $("#user-info-name").css("display", "block");
                 $("#user-info-change-name").css("display", "none");
+                $("#upload-icon-container").css("display","none");
+                $("#user-info-icon-footer").css("display","none");
                 $("#user-info-edit-a").css("display", "block");
+                $("#user-info-icon-img").attr("src",iconCache);
                 break;
         }
     }
@@ -333,6 +349,49 @@ function html5Reader(file) {
 }
 //.upload-file ends
 
+//upload icon
+function changeIcon()
+{
+    var pic = document.getElementById("user-info-icon-img");
+    var file = document.getElementById("upload-icon");
+    var ext = file.value.substring(file.value.lastIndexOf(".") + 1).toLowerCase();
+    // gif在IE浏览器暂时无法显示
+    if (ext != 'png' && ext != 'jpg' && ext != 'jpeg' && ext != 'gif') {
+        alert("文件必须为图片！");
+        return;
+    }
+    // IE浏览器
+    if (document.all) {
+
+        file.select();
+        var reallocalpath = document.selection.createRange().text;
+        var ie6 = /msie 6/i.test(navigator.userAgent);
+        // IE6浏览器设置img的src为本地路径可以直接显示图片
+        if (ie6)
+            pic.src = reallocalpath;
+        else {
+            // 非IE6版本的IE由于安全问题直接设置img的src无法显示本地图片，但是可以通过滤镜来实现
+            pic.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='image',src=\"" + reallocalpath + "\")";
+            // 设置img的src为base64编码的透明图片 取消显示浏览器默认图片
+            pic.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+        }
+    } else {
+        html5IconReader(file);
+    }
+
+
+}
+;
+
+function html5IconReader(file) {
+    var file = file.files[0];
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function (e) {
+        var pic = document.getElementById("user-info-icon-img");
+        pic.src = this.result;
+    }
+}
 //check input field
 function checkRequired(event) {
     var field = event.target;

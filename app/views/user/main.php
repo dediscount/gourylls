@@ -20,8 +20,21 @@
 		<div class="user-content-container">
 			<!--user's information-->
 			<div class="user-info">
-				<div id="user-info-icon" class="user-info-icon img-circle">
-				</div>
+					<div id="user-info-icon-container">
+						<form action="" method="POST" role="form">
+							<div id="user-info-icon" class="user-info-icon img-circle">
+								<img id="user-info-icon-img" class="img-circle" src="/gourylls/public/user/userid/userid_icon.png">
+								<div id="upload-icon-container" class="form-group">	
+									<input id="upload-icon" class="form-control" type="file" accept="image/*"><!--get username from database-->
+								</div>
+							</div>
+							<div  class="form-footer" id="user-info-icon-footer">
+								<button type="button"  onclick="showEditForm('close')" class="btn btn-gray">Close</button>
+								<button type="submit" class="btn btn-primary btn-hue">&nbspSave&nbsp</button>
+							</div>
+						</form>	
+					</div>
+				
 				<!--display when not editting-->
 				<div id="user-info-name">
 					<h2>Username</h2>
