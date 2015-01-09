@@ -1,18 +1,14 @@
 <?php
-
 class Controller {
 
     public function model($model) {
-        $model = $model . "Model";
+        
+        $model = $model . "Model";        
         require_once '/../models/' . $model . '.php';
         return new $model();
     }
+    
     public function view($view, $data = []) {
-        //var_dump($data);
-            
-        
         require_once '/../views/' . $view . '.php';
-        
-        
     }
 }

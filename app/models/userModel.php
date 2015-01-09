@@ -1,14 +1,17 @@
 <?php
-class UserModel
+class UserModel extends Model
 {
     
+    public $account;
     public function __construct() {
-        //$this->account=account;
+        parent::__construct();
+        if(isset($_SESSION["account"]))
+        {
+            $this->account=$_SESSION["account"];
+        }
+        else {
+            $this->account=NULL;
+        }
     }
-    
-            
-    
-    
-    
 }
 

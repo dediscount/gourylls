@@ -10,6 +10,9 @@
 			<span class="caret"></span>
 		</a>
 		<ul class="dropdown-menu" role="menu">
+                        <li>
+				<a><?=$data['account']?></a>
+			</li>
 			<li>
 				<a href="/gourylls/user">My page</a>
 			</li>
