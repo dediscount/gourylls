@@ -5,7 +5,7 @@ class UserModel extends Model {
     public $account;
     public $ID;
     public $name;
-    public $iconPath = "default";
+    public $iconPath = ICON_PNG;
 
     public function __construct($data = []) {
         $this->initConnection();
@@ -68,5 +68,10 @@ class UserModel extends Model {
             }
         }
     }
-
+    
+    public function changeIconPath($path)
+    {
+        $sql = "update gourylls.user set icon_path='" . $path . "' where account='" . $this->account . "';";
+        $this->conn->query($sql);
+    }
 }

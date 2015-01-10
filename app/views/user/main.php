@@ -13,26 +13,30 @@
 				-->
 				<!--upload photo-->
 				<div class="glyphicon glyphicon-plus pull-right navbar-found-upload-icon navbar-found-upload">
-					<input id="upload-file" type="file" class="input-hidden-upload" accept="image/*">
+					<input id="upload-file" name="file "type="file" class="input-hidden-upload" accept="image/*">
 				</div>
 			</ul>
-		</div>	
+		</div>
 		<div class="user-content-container">
 			<!--user's information-->
 			<div class="user-info">
 					<div id="user-info-icon-container">
-						<form action="" method="POST" role="form">
+						<form action="/gourylls/user/changeicon" method="POST" role="form" enctype="multipart/form-data">
 							<div id="user-info-icon" class="user-info-icon img-circle">
-								<img id="user-info-icon-img" class="img-circle" src="/gourylls/public/user/userid/userid_icon.png">
+                                                            <img id="user-info-icon-img" class="img-circle" src="<?=$data['iconPath']?>"/>
 								<div id="upload-icon-container" class="form-group">	
-									<input id="upload-icon" class="form-control" type="file" accept="image/*"><!--get username from database-->
+									<input id="upload-icon" class="form-control" name="file" type="file" accept="image/*" /><!--get username from database-->
+                                                                        <?php
+                                                                        /*
+                                                                        in a file input tag, the attribute name="file" is required, $_FILE variable cannot read any data without name="file"
+                                                                         */?>
 								</div>
 							</div>
 							<div  class="form-footer" id="user-info-icon-footer">
 								<button type="button"  onclick="showEditForm('close')" class="btn btn-gray">Close</button>
 								<button type="submit" class="btn btn-primary btn-hue">&nbspSave&nbsp</button>
 							</div>
-						</form>	
+						</form>
 					</div>
 				
 				<!--display when not editting-->
