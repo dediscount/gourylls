@@ -2,14 +2,11 @@
 <div class="navbar  pull-right navbar-login">
     <?php
     if (isset($_SESSION["account"])) {
-        
         ?>
     <!--display when logined-->
-
-
 	    <div class="dropdown">
 	        <a id="dropdownMenu1" class="logined dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-				<img src="/gourylls/public/user/userid/userid_icon.png" class="img-circle navbar-user-icon" title="Go to my page">
+                    <img src="<?=$data['iconPath']?>" class="img-circle navbar-user-icon" title="Go to my page">
 				<span class="caret"></span>
 			</a>
 			<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
