@@ -7,7 +7,10 @@
 			</div>
 			<form action="/gourylls/found/addpicture" method="POST" role="form" enctype="multipart/form-data">
 				<div class="modal-body">
-					<div>
+					<div id="upload-photo-container" class="glyphicon glyphicon-plus">
+						<input id="upload-file" name="picture" type="file" class="input-hidden-upload" accept="image/*" required="required" title="Please upload a photo">
+					</div>
+					<div id="upload-photo-preview-container">
 						<img id="upload-photo-preview" src=""/>
 					</div>
 					<div id="upload-photo-text" class="form-group">

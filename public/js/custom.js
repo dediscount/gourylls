@@ -1,11 +1,21 @@
 
 var iconCache;
-
+var uploadPhoto;
 $("document").ready(function () {
-
-    if ($("#upload-file"))
+	if ($("#upload-photo-button").on("click",function(){
+		$("#upload-file").replaceWith( uploadPhoto = uploadPhoto.clone(true));
+		$("#upload-photo-preview").attr("src","");
+		$("#upload-file").parent().css("display","inline-block");
+	}))
+    if ($("#upload-file").length)
     {
-        $("#upload-file").change(changeFile);
+        $("#upload-file").change(function(){
+        	if($("#upload-file").css("display")!="none")	
+        	{	
+        		changeFile();
+        		$("#upload-file").parent().css("display","none");
+        	}
+        });
     }
 
     if ($("#upload-icon-container"))
@@ -35,7 +45,8 @@ $(window).resize(function () {
 $(window).load(function () {
     sizeAdjustor();
     if($("#user-info-icon-img").length)
-    iconCache=$("#user-info-icon-img").attr("src");
+    	iconCache=$("#user-info-icon-img").attr("src");
+    uploadPhoto=$("#upload-file");
 });
 //adjust size when loading or windows changed
 function sizeAdjustor()
@@ -391,7 +402,7 @@ function changeFile()
     var pic = document.getElementById("upload-photo-preview");
     var file = document.getElementById("upload-file");
     var ext = file.value.substring(file.value.lastIndexOf(".") + 1).toLowerCase();
-    $("#uploadModal").modal();
+    
     // gif在IE浏览器暂时无法显示
     if (ext != 'png' && ext != 'jpg' && ext != 'jpeg' && ext != 'gif') {
         alert("文件必须为图片！");

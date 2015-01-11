@@ -11,8 +11,8 @@
 				</li>
 				-->
 				<!--upload photo-->
-				<div class="glyphicon glyphicon-plus pull-right navbar-found-upload-icon navbar-found-upload">
-					<input id="upload-file" name="picture" type="file" class="input-hidden-upload" accept="image/*">
+				<div id="upload-photo-button" class="glyphicon glyphicon-plus pull-right navbar-found-upload-icon navbar-found-upload" data-toggle="modal" href="#uploadModal">
+					
 				</div>
 			</ul>
 		</div>
