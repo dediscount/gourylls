@@ -546,3 +546,37 @@ function showSuccess(event)
 }
 //...input field styles end
 
+//dice
+function dice()
+{
+	var type=$("#dice-category").val();
+	var resultText="result";//get from server side
+	var resultHref="http://www.google.com";//get from server side
+
+	var intervalIndex=0;
+
+	var pesudoResults = ["tip1","tip2","tip3","tip4","tip5","tip6","tip7","tip8"];
+	var pesudoLength=pesudoResults.length;
+
+	showResult();
+	function showResult()
+	{
+		$("#diceResult").html(pesudoResults[Math.floor(Math.random()*pesudoLength)]);
+
+		var timeInterval;
+		if(intervalIndex<=10)
+			timeInterval=200;
+		else
+			timeInterval=200+100*(intervalIndex-10);
+
+		intervalIndex++;
+
+		if(intervalIndex<=13)
+			setTimeout(function(){showResult()},timeInterval);
+		else
+		{
+			$("#diceResult").attr("href",resultHref);
+			$("#diceResult").html(resultText+"<span class='glyphicon glyphicon-chevron-right'></span>");
+		}
+	}
+}
