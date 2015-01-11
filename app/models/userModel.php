@@ -32,6 +32,9 @@ class UserModel extends Model {
         }
     }
 
+    public function getRootDir(){
+        return UPLOAD_PATH.$this->account;
+    }
     public function changeName($account, $name) {
         if ($this->name === $name || $this->account != $account || strlen($name) < 1) {
             return false;

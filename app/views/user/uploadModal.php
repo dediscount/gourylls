@@ -5,15 +5,15 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h4 class="modal-title">Upload</h4>
 			</div>
-			<form onsubmit="#" action="" method="POST" role="form">
+			<form onsubmit="" action="/gourylls/found/addpicture" method="POST" role="form">
 				<div class="modal-body">
 					<div>
 						<img id="upload-photo-preview" src=""/>
 					</div>
 					<div id="upload-photo-text" class="form-group">
-						<input id="upload-title" type="text" class="form-control" placeholder="Title" autofocus required="required"><!--get username from database-->
+						<input id="upload-title" name="pic_title"type="text" class="form-control" placeholder="Title" autofocus required="required"><!--get username from database-->
 					</div>
-					<textarea id="upload-description" class="form-control" rows="3" placeholder="description"></textarea>
+					<textarea id="upload-description" name="pic_desc" class="form-control" rows="3" placeholder="description"></textarea>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

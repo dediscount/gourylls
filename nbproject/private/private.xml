@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/xampp/htdocs/gourylls/app/views/found/rightsidebar.php</file>
-            <file>file:/D:/xampp/htdocs/gourylls/config.php</file>
-            <file>file:/D:/xampp/htdocs/gourylls/public/js/custom.js</file>
-            <file>file:/D:/xampp/htdocs/gourylls/app/views/user/main.php</file>
-            <file>file:/D:/xampp/htdocs/gourylls/app/core/Controller.php</file>
             <file>file:/D:/xampp/htdocs/gourylls/app/controllers/User.php</file>
+            <file>file:/D:/xampp/htdocs/gourylls/app/models/PictureModel.php</file>
             <file>file:/D:/xampp/htdocs/gourylls/app/controllers/Found.php</file>
-            <file>file:/D:/xampp/htdocs/gourylls/app/models/userModel.php</file>
+            <file>file:/D:/xampp/htdocs/gourylls/app/models/UserModel.php</file>
         </group>
     </open-files>
 </project-private>
