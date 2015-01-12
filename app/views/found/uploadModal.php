@@ -20,7 +20,7 @@
 http://localhost/gourylls/test/addpicture.php 像这个页面                                                
                                                    -->
 					</div>
-					<textarea id="upload-description" class="form-control" rows="3" placeholder="description"></textarea>
+					<textarea id="upload-description" name="pic_desc" class="form-control" rows="3" placeholder="description"></textarea>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

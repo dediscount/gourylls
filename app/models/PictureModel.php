@@ -25,8 +25,8 @@ class PictureModel extends Model{
         
     }
     public function addPicture($userID,$picPath,$title,$format,$size,$description) {
-        $this->initConnection();
-        $conn=$this->conn;
+        
+        $conn=$this->getConnection();
         $likes=0;
         $stmt = [];
             if (!($stmt = $conn->prepare("INSERT INTO gourylls.pictures (pic_path,title,description,format,size,userID,likes) VALUES (?,?,?,?,?,?,?)"))) {

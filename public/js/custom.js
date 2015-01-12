@@ -230,7 +230,7 @@ function signin()
         success: function (data) {
 
             data = parseInt(data);
-            alert(data);
+            //alert(data);
             if (data == 1)
             {
                 //alert(typeof(data));

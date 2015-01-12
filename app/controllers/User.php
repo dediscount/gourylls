@@ -8,7 +8,6 @@ class User extends Controller {
     public function index() {//index function !!!!!!
         $user = $this->user;
         $this->view('user/index', ['name' => $user->name,'iconPath'=>$user->iconPath]);
-
     }
 
     public function changeName() {
@@ -36,16 +35,15 @@ class User extends Controller {
             }
         }
     }
+    
     public function addPicture() {
-        echo 'hehe';
         if ($_FILES["picture"]["error"] > 0) {
-            echo '2';
             echo "Error: " . $_FILES["picture"]["error"] . "<br />";
-        } else if (isset($_FILES["picture"]["name"])) {
-            
+        } else if (isset($_FILES["picture"]["name"])) {            
             if ($this->isLoggedIn()) {
-                
                 $user = $this->model('User');
+                $pic=  $this->model('Picture');
+                
                 $date=date_create();
                 $name = date_timestamp_get($date).$_FILES["picture"]["name"];
                 $type = substr($_FILES["picture"]["name"], strrpos($_FILES["picture"]["name"], '.') + 1);
@@ -53,18 +51,12 @@ class User extends Controller {
                 $tempName = $_FILES['picture']['tmp_name'];
                 $title=$_POST['pic_title'];
                 $description=$_POST['pic_desc'];
-                $picPath=$user->getRootDir().'/pictures/'.$name;
+                $picPath=$user->getPicturePath().$name;
                 $userID = $user->ID;
-                $pic=  $this->model('Picture');
+                
+                $user->movePicture($tempName,$name);
                 $pic->addPicture($userID,$picPath,$title,$type,$size,$description);
-                $this->movePicture($tempName,$name);
-                
-                
-                
-                //echo $type;
-                //$this->moveFile($_FILES["file"]["tmp_name"], 'icon.' . $type, UPLOAD_PATH . $user->account);
-                //$user->changeIconPath(ICON_PATH . $user->account . '/icon.' . $type);
-                //echo "<script>window.location =\"/gourylls/user\";</script>";
+                echo "<script>window.location =\"/gourylls/user\";</script>";
             }
         }
     }
@@ -77,65 +69,10 @@ class User extends Controller {
             {
                 $user = $this->user;
                 $type = substr($_FILES["file"]["name"],strrpos($_FILES["file"]["name"],'.')+1);
-                //echo $type;
-                $this->moveFile($_FILES["file"]["tmp_name"],'icon.'.$type,UPLOAD_PATH.$user->account);
-                $user->changeIconPath(ICON_PATH.$user->account.'/icon.'.$type);
+                $user->moveIcon($_FILES["file"]["tmp_name"],$type);
                 echo "<script>window.location =\"/gourylls/user\";</script>";
             }
 
-        }
-    }
-    
-    public function movePicture($tempName,$fileName)
-    {
-        $location=$this->newPictureDirectory();
-        $date=date_create();
-        $this->moveFile($tempName,date_timestamp_get($date).$fileName, $location);
-    }
-    public function getPictureDirectory()
-    {
-        $this->getRootDirectory().'/pictures';
-    }
-    
-    private function newPictureDirectory()
-    {
-        $root=$this->getRootDirectory();
-        if(!file_exists($root))
-        {
-            $this->newDirectory($root);
-            $this->newDirectory($root.'/pictures');
-        }
-        else if(!file_exists ($root.'/pictures'))
-        {
-            $this->newDirectory($root.'/pictures');
-        }
-        return $root.'/pictures';
-    }
-    private function getRootDirectory()
-    {
-        return UPLOAD_PATH.$this->user->account;
-    }
-    
-    private function moveFile($tempName, $fileName, $location)
-    {
-        //echo $location;
-        $this->newDirectory($location);
-        move_uploaded_file($tempName, $location.'/'.$fileName);
-    }
-    private function newDirectory($location)
-    {
-//        if(mkdir($location))
-//        {
-//            return;
-//        }else
-//        {
-//            $location=strrpos($location,'/');
-//        }
-//        
-        
-        if(!file_exists($location))
-        {
-            mkdir($location);
         }
     }
 }
