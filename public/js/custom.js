@@ -7,6 +7,7 @@ $("document").ready(function () {
 		$("#upload-photo-preview").attr("src","");
 		$("#upload-file").parent().css("display","inline-block");
 	}))
+	$("#user-post-ul > li > div").click(showPhotoDetail);
     if ($("#upload-file").length)
     {
         $("#upload-file").change(function(){
@@ -579,4 +580,10 @@ function dice()
 			$("#diceResult").html(resultText+"<span class='glyphicon glyphicon-chevron-right'></span>");
 		}
 	}
+}
+
+function showPhotoDetail(event)
+{
+	var photoId = event.target.id;//get the id of clicked photo
+	
 }
