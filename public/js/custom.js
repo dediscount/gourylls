@@ -2,12 +2,17 @@
 var iconCache;
 var uploadPhoto;
 $("document").ready(function () {
+	//
 	if ($("#upload-photo-button").on("click",function(){
 		$("#upload-file").replaceWith( uploadPhoto = uploadPhoto.clone(true));
 		$("#upload-photo-preview").attr("src","");
 		$("#upload-file").parent().css("display","inline-block");
 	}))
+	//
 	$("#user-post-ul > li > div").click(showPhotoDetail);
+	//
+	$(".found-photo-user").click(showUserDetail);
+	//
     if ($("#upload-file").length)
     {
         $("#upload-file").change(function(){
@@ -18,7 +23,7 @@ $("document").ready(function () {
         	}
         });
     }
-
+    //
     if ($("#upload-icon-container"))
     {
     	$("#upload-icon").change(function(){changeIcon();showEditForm("changeIcon")});
@@ -586,4 +591,8 @@ function showPhotoDetail(event)
 {
 	var photoId = event.target.id;//get the id of clicked photo
 	
+}
+function showUserDetail(event)
+{
+	var userId = event.target.id;
 }
