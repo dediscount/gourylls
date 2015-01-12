@@ -594,5 +594,6 @@ function showPhotoDetail(event)
 }
 function showUserDetail(event)
 {
-	var userId = event.target.id;
+	var photoId = $(event.target).parents(".found-photo-container").attr("id");
+	
 }
