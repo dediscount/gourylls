@@ -1,5 +1,5 @@
 			<!--user's post photos-->
-			<div id="user-post" class="user-post">
+			<div id="" class="user-post">
 				<ul id="user-post-ul" class="user-post-ul">
 
 					<!--iterate this part to show more post photos-->

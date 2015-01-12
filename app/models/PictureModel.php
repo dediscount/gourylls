@@ -11,7 +11,8 @@
  *
  * @author Administrator
  */
-class PictureModel extends Model{
+class PictureModel extends Model {
+
     public $ID;
     public $userID;
     public $title;
@@ -21,25 +22,39 @@ class PictureModel extends Model{
     public $size;
     public $likes;
     public $description;
-    public function __construct($data=[]) {
+
+    public function __construct($data = []) {
         
     }
-    public function addPicture($userID,$picPath,$title,$format,$size,$description) {
-        
-        $conn=$this->getConnection();
-        $likes=0;
+
+    public function addPicture($userID, $picPath, $title, $format, $size, $description) {
+
+        $conn = $this->getConnection();
+        $likes = 0;
         $stmt = [];
-            if (!($stmt = $conn->prepare("INSERT INTO gourylls.pictures (pic_path,title,description,format,size,userID,likes) VALUES (?,?,?,?,?,?,?)"))) {
-                echo "Prepare failed: (" . $this->conn->errno . ") " . $this->conn->error;
-            }
-            if (!$stmt->bind_param("ssssiii", $picPath, $title,$description, $format,$size,$userID,$likes)) {
-                echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
-            }
-            if (!$stmt->execute()) {
-                echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
-            }
+        if (!($stmt = $conn->prepare("INSERT INTO gourylls.pictures (pic_path,title,description,format,size,userID,likes) VALUES (?,?,?,?,?,?,?)"))) {
+            echo "Prepare failed: (" . $this->conn->errno . ") " . $this->conn->error;
+        }
+        if (!$stmt->bind_param("ssssiii", $picPath, $title, $description, $format, $size, $userID, $likes)) {
+            echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        if (!$stmt->execute()) {
+            echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
     }
-    
-    
-    
+
+    public function getPicturesByUser($userID) {
+        $conn = $this->getConnection();
+        $stmt = [];
+        if (!($stmt = $conn->prepare("select id,pic_path from gourylls.pictures where userID = (?)"))) {
+            echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+        }
+        if (!$stmt->bind_param("i", $userID)) {
+            echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        if (!$stmt->execute()) {
+            echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        return $stmt->get_result();
+    }
 }

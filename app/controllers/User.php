@@ -7,7 +7,8 @@ class User extends Controller {
     }
     public function index() {//index function !!!!!!
         $user = $this->user;
-        $this->view('user/index', ['name' => $user->name,'iconPath'=>$user->iconPath]);
+        $pics = $this->model("Picture");
+        $this->view('user/index', ['ID'=>$user->ID, 'name' => $user->name,'iconPath'=>$user->iconPath,'pictures'=>$pics->getPicturesByUser($user->userID)]);
     }
 
     public function changeName() {
