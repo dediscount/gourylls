@@ -1,16 +1,19 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of FoodModel
- *
- * @author Administrator
- */
-class FoodModel {
-    //put your code here
+class FoodModel extends Model{
+    public function findFoodByCategory($cate)
+    {
+        $conn=  $this->getConnection();
+        $conn->query("SET NAMES UTF8;");//important
+        $stmt = [];
+        if (!($stmt = $conn->prepare("select name, recipe_availability, recipe_link from gourylls.food where class like '" .$cate. "' LIMIT 10;"))) {
+            echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+        }
+//        if (!$stmt->bind_param("i", $num)) {
+//            echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+//        }
+        if (!$stmt->execute()) {
+            echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        return $stmt->get_result();
+    }
 }

@@ -560,15 +560,59 @@ function showSuccess(event)
 function dice()
 {
     var type = $("#dice-category").val();
+    switch(type)
+    {
+        case "breakfast":
+            type=1;
+            break;
+        case "lunch":
+            type=2;
+            break;
+        case "dinner":
+            type=3;
+            break;
+        case"nightSnack":
+            type=4;
+            break;
+        default:
+            type=0;
+    }
+    var food=[];
     var resultText = "result";//get from server side
     var resultHref = "http://www.google.com";//get from server side
 
     var intervalIndex = 0;
 
-    var pesudoResults = ["tip1", "tip2", "tip3", "tip4", "tip5", "tip6", "tip7", "tip8"];
-    var pesudoLength = pesudoResults.length;
-
-    showResult();
+    var pesudoResults;
+    var pesudoLength;
+    
+    $.ajax({
+        url: "/gourylls/home/dice",
+        data: {category: type},
+        type: "POST",
+        dataType: "text",
+        success: function (tips) {
+            alert(tips);
+            var obj=$.parseJSON(tips);
+            var i;
+            for(i=0; i<obj.tips.length;i++)
+            {
+                food[i]=obj.tips[i].name;
+                //alert(food[i]);
+            }
+            pesudoResults = food;
+            pesudoLength = pesudoResults.length;
+            resultText = "result";
+            resultHref = "http://www.google.com";
+            showResult();
+        },
+        error: function (xhr, status, errorThrown) {
+            alert("Sorry, there was a problem!");
+            console.log("Error: " + errorThrown);
+            console.log("Status: " + status);
+            console.dir(xhr);
+        }
+    });
     function showResult()
     {
         $("#diceResult").html(pesudoResults[Math.floor(Math.random() * pesudoLength)]);
