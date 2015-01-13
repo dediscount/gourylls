@@ -20,7 +20,7 @@
 		  </div>
 		</div>
 			<!--goto home when clicked-->
-		   
+		<div class="form-group">
 			<select name="" id="dice-category" class="form-control">
 				<option value="all">-- All --</option>
 				<option value="breakfast">Breakfast</option>
@@ -28,5 +28,6 @@
 				<option value="dinner">Dinner</option>
 				<option value="nightSnack">Night Snack</option>
 			</select>
+		</div>
 	</div>
 </div>
