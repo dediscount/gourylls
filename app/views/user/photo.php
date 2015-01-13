@@ -6,7 +6,7 @@
 						</div>
 						<button type="button" data-toggle='modal' href='#delete-photo-dialog' class="btn btn-danger pull-right btn-delete">DELETE</button>
 					</div>
-					<div class="photo-detail-photo" style="background-image:url('<?=$data['pic_path']?>')">	
+					<div id="<?=$data['id']?>" class="photo-detail-photo" style="background-image:url('<?=$data['pic_path']?>')">	
 					</div>
 					<div class="photo-detail-footer">
 						<span class="description"><?=$data['description']?></span>

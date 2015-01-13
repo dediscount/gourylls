@@ -8,7 +8,7 @@ class User extends Controller {
     public function index() {//index function !!!!!!
         $user = $this->user;
         $pics = $this->model("Picture");
-        $this->view('user/index', ['ID'=>$user->ID, 'name' => $user->name,'iconPath'=>$user->iconPath,'pictures'=>$pics->getPicturesByUser($user->ID)]);
+        $this->view('user/index', ['ID'=>$user->ID, 'name' => $user->name,'iconPath'=>$user->iconPath,'numOfPics'=>$user->numOfPics,'pictures'=>$pics->getPicturesByUser($user->ID)]);
     }
 
     public function changeName() {
@@ -89,6 +89,13 @@ class User extends Controller {
         $user = $this->user;
         $pics = $this->model("Picture");
         $this->view('user/post', ['pictures'=>$pics->getPicturesByUser($user->ID)]);
+    }
+    
+    public function deletePicture(){
+        $pics = $this->model("Picture");
+        $pics->deletePicture($_POST['id']);
+        //echo 'a';
+        $this->showPost();
     }
     
 }

@@ -6,13 +6,13 @@ class UserModel extends Model {
     public $ID;
     public $name;
     public $iconPath = ICON_PNG;
-
+    public $numOfPics;
     public function __construct($data = []) {
         $conn = $this->getConnection();
         //var_dump($this->conn);
         if (isset($_SESSION["account"])) {
             $this->account = $_SESSION["account"];
-            $sql = "select name,id,icon_path from gourylls.user where account='" . $this->account . "';";
+            $sql = "select name,id,icon_path,numOfPhotos from gourylls.user where account='" . $this->account . "';";
             if ($result = $conn->query($sql)) {
                 if ($result->num_rows === 0) {
                     die("Database error.");
@@ -24,6 +24,7 @@ class UserModel extends Model {
                         if ($row['icon_path'] != '') {
                             $this->iconPath = $row['icon_path'];
                         }
+                        $this->numOfPics = $row['numOfPhotos'];
                     }
                 }
             } else {
@@ -32,8 +33,22 @@ class UserModel extends Model {
         }
     }
     
-    public function getPicturePath()
+    public function findUserByID($ID)
     {
+        $conn = $this->getConnection();
+        if (!($stmt = $conn->prepare("select * from gourylls.user where ID = (?)"))) {
+            echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+        }
+        if (!$stmt->bind_param("i", $ID)) {
+            echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        if (!$stmt->execute()) {
+            echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        return $stmt->get_result();
+    }
+    
+    public function getPicturePath(){
         return $this->getUserPath().'pictures/';
     }
 
@@ -73,7 +88,7 @@ class UserModel extends Model {
             }
         }
     }
-    
+
     public function movePicture($tempName, $pictureName) {
         $this->moveFile($tempName, $pictureName, $this->getPictureMapping());
     }

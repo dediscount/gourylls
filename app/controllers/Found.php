@@ -4,7 +4,17 @@ class Found extends Controller {
 
     public function index() {//index function !!!!!!
         $user = $this->model('User');
-        $this->view('found/index', ['account' => $user->account, 'iconPath' => $user->iconPath]);
+        $pics = $this->model("Picture");
+        $pic = $pics->getPictureByRow(0);
+        $this->view('found/index', ['account' => $user->account, 'iconPath' => $user->iconPath, 'title' => $pic['title'], 'picPath' => $pic['pic_path'], 'description' => $pic['description'], 'p_iconPath' => $pic['icon_path'], 'date' => $pic['uploadingDate']]);
+    }
+
+    public function loadMore() {
+        if (isset($_POST['num'])) {
+            $pics = $this->model("Picture");
+            $pic = $pics->getPictureByRow($_POST['num']);
+            $this->view('found/loadmore', ['title' => $pic['title'], 'picPath' => $pic['pic_path'], 'description' => $pic['description'], 'p_iconPath' => $pic['icon_path'], 'date' => $pic['uploadingDate']]);
+        }
     }
 
     public function addPicture() {

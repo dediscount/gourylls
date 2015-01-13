@@ -111,15 +111,15 @@
 							<span>likes |</span>
 						</li>
 						<li>
-							<i>0</i><!--get the number of posts here-->
+							<i><?=$data['numOfPics']?></i><!--get the number of posts here-->
 							<span>post</span>
 						</li>
 					</ul>
 				</div>
 			</div><!--/.user-info-->
 
-			<?php require_once('post.php') ?>
-                        <?php //require_once('photo.php') ?>
+			<?php require_once('post.php'); ?>
+                        
 
 		</div><!--/.user-content-container-->
 	</div><!--/.user-container-->
@@ -135,7 +135,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="button" onclick="deletePhoto()" class="btn btn-danger">DELETE</button>
+							<button type="button" onclick="deletePicture()" class="btn btn-danger">DELETE</button>
 						</div>
 					</div><!-- /.modal-content -->
 				</div><!-- /.modal-dialog -->

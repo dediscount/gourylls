@@ -57,8 +57,8 @@ class PictureModel extends Model {
         }
         return $stmt->get_result();
     }
-    public function getPictureByID($ID)
-    {
+
+    public function getPictureByID($ID) {
         $conn = $this->getConnection();
         $stmt = [];
         if (!($stmt = $conn->prepare("select id,pic_path,title,description,uploadingdate,likes from gourylls.pictures where ID = (?)"))) {
@@ -72,4 +72,35 @@ class PictureModel extends Model {
         }
         return $stmt->get_result()->fetch_assoc();
     }
+
+    public function deletePicture($ID) {
+        $conn = $this->getConnection();
+        $stmt = [];
+        if (!($stmt = $conn->prepare("delete from gourylls.pictures where id=(?)"))) {
+            echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+        }
+        if (!$stmt->bind_param("i", $ID)) {
+            echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        if (!$stmt->execute()) {
+            echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+    }
+
+    public function getPictureByRow($num) {
+
+        $conn = $this->getConnection();
+        $stmt = [];
+        if (!($stmt = $conn->prepare("select * from gourylls.pictures inner join gourylls.user on pictures.userID=user.ID  order by uploadingdate desc LIMIT 1 OFFSET " . $num . ";"))) {
+            echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+        }
+//        if (!$stmt->bind_param("i", $num)) {
+//            echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+//        }
+        if (!$stmt->execute()) {
+            echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        return $stmt->get_result()->fetch_assoc();
+    }
+
 }

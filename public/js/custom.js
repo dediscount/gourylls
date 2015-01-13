@@ -1,4 +1,4 @@
-
+var loadPic=1;
 var iconCache;
 var uploadPhoto;
 $("document").ready(function () {
@@ -281,11 +281,11 @@ function loadmore()
 
     $.ajax({
         // The URL for the request
-        url: "/gourylls/app/views/found/loadmore.php",
+        url: "/gourylls/found/loadmore",
         // The data to send (will be converted to a query string)
-
+        data:{num:loadPic},
         // Whether this is a POST or GET request
-        type: "GET",
+        type: "POST",
         // The type of data we expect back
         dataType: "html",
         // Code to run if the request succeeds;
@@ -293,6 +293,7 @@ function loadmore()
         success: function (html) {
             $("#loadmore").before(html);
             sizeAdjustor();
+            loadPic+=1;
         },
         // Code to run if the request fails; the raw request and
         // status codes are passed to the function
@@ -458,7 +459,7 @@ function changeIcon()
     var file = document.getElementById("upload-icon");
     var ext = file.value.substring(file.value.lastIndexOf(".") + 1).toLowerCase();
     // gif在IE浏览器暂时无法显示
-    if (ext !== 'png' && ext !== 'jpg' && ext !=='jpeg' && ext !== 'gif') {
+    if (ext != 'png' && ext != 'jpg' && ext != 'jpeg' && ext != 'gif') {
         alert("文件必须为图片！");
         return;
     }
@@ -480,8 +481,6 @@ function changeIcon()
     } else {
         html5IconReader(file);
     }
-
-
 }
 ;
 
@@ -492,13 +491,13 @@ function html5IconReader(file) {
     reader.onload = function (e) {
         var pic = document.getElementById("user-info-icon-img");
         pic.src = this.result;
-    };
+    }
 }
 //check input field
 function checkRequired(event) {
     var field = event.target;
     var form = $(field).parent(".form-group");
-    if ($(field).val() !== "")
+    if ($(field).val() != "")
     {
         $(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
         $(form).addClass("has-success");
@@ -646,6 +645,29 @@ function showPhotoDetail(event)
 function showUserDetail(event)
 {
 	var photoId = $(event.target).parents(".found-photo-container").attr("id");
-	
+}
 
+function deletePicture()
+{
+    var picID = $(".photo-detail-photo").attr("id");
+    $.ajax({
+        // The URL for the request
+        url: "/gourylls/user/deletepicture",
+        // The data to send (will be converted to a query string)
+        data: {id: picID},
+        // Whether this is a POST or GET request
+        type: "POST",
+        dataType: "html",
+        success: function (post) {
+            $("#photo-detail-block").replaceWith(post);
+            $("#user-post-ul > li > div").click(showPhotoDetail);
+        },
+        error: function (xhr, status, errorThrown) {
+            alert("Sorry, there was a problem!");
+            console.log("Error: " + errorThrown);
+            console.log("Status: " + status);
+            console.dir(xhr);
+        }
+    });
+    
 }
