@@ -2,12 +2,19 @@
 var iconCache;
 var uploadPhoto;
 $("document").ready(function () {
-    if ($("#upload-photo-button").on("click", function () {
-        $("#upload-file").replaceWith(uploadPhoto = uploadPhoto.clone(true));
-        $("#upload-photo-preview").attr("src", "");
-        $("#upload-file").parent().css("display", "inline-block");
-    }))
-        $("#user-post-ul > li > div").click(showPhotoDetail);
+
+	//
+	if ($("#upload-photo-button").on("click",function(){
+		$("#upload-file").replaceWith( uploadPhoto = uploadPhoto.clone(true));
+		$("#upload-photo-preview").attr("src","");
+		$("#upload-file").parent().css("display","inline-block");
+	}))
+	//
+	$("#user-post-ul > li > div").click(showPhotoDetail);
+	//
+	$(".found-photo-user").click(showUserDetail);
+	//
+
     if ($("#upload-file").length)
     {
         $("#upload-file").change(function () {
@@ -18,7 +25,7 @@ $("document").ready(function () {
             }
         });
     }
-
+    //
     if ($("#upload-icon-container"))
     {
         $("#upload-icon").change(function () {
@@ -451,7 +458,7 @@ function changeIcon()
     var file = document.getElementById("upload-icon");
     var ext = file.value.substring(file.value.lastIndexOf(".") + 1).toLowerCase();
     // gif在IE浏览器暂时无法显示
-    if (ext != 'png' && ext != 'jpg' && ext != 'jpeg' && ext != 'gif') {
+    if (ext !== 'png' && ext !== 'jpg' && ext !=='jpeg' && ext !== 'gif') {
         alert("文件必须为图片！");
         return;
     }
@@ -485,13 +492,13 @@ function html5IconReader(file) {
     reader.onload = function (e) {
         var pic = document.getElementById("user-info-icon-img");
         pic.src = this.result;
-    }
+    };
 }
 //check input field
 function checkRequired(event) {
     var field = event.target;
     var form = $(field).parent(".form-group");
-    if ($(field).val() != "")
+    if ($(field).val() !== "")
     {
         $(form).removeClass("has-warning").removeClass("has-error").removeClass("has-success");
         $(form).addClass("has-success");
@@ -577,7 +584,7 @@ function dice()
 
         if (intervalIndex <= 13)
             setTimeout(function () {
-                showResult()
+                showResult();
             }, timeInterval);
         else
         {
@@ -609,6 +616,7 @@ function showPost()
 
 function showPhotoDetail(event)
 {
+
     var photoId = event.target.id;//get the id of clicked photo
     $.ajax({
         // The URL for the request
@@ -632,4 +640,12 @@ function showPhotoDetail(event)
             console.dir(xhr);
         }
     });
+
+	
+}
+function showUserDetail(event)
+{
+	var photoId = $(event.target).parents(".found-photo-container").attr("id");
+	
+
 }
