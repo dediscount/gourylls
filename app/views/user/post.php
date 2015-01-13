@@ -1,11 +1,18 @@
-			<!--user's post photos-->
-			<div id="" class="user-post">
-				<ul id="user-post-ul" class="user-post-ul">
 
-					<!--iterate this part to show more post photos-->
-					<li>
-						<div id="photoid" style="background-image:url('/gourylls/public/uploads/249341/pictures/1421094767x_large_ClTz_0660000100991262.jpg')"></div><!--set the background-url dynamically-->
-					</li>
-					
-				</ul>
-			</div><!--/.user-post-->
+    <!--user's post photos-->
+    <div id="user-post" class="user-post">
+        <ul id="user-post-ul" class="user-post-ul">
+<?php
+$result = $data['pictures'];
+while ($row = $result->fetch_assoc()) {
+    ?>
+            
+            <li>
+                <div id="<?=$row['id']?>" style="background-image:url('<?=$row['pic_path']?>')"></div><!--set the background-url dynamically-->
+            </li>
+    <?php
+}
+?>
+        </ul>
+    </div><!--/.user-post-->
+

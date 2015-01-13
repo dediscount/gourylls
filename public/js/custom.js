@@ -2,26 +2,29 @@
 var iconCache;
 var uploadPhoto;
 $("document").ready(function () {
-	if ($("#upload-photo-button").on("click",function(){
-		$("#upload-file").replaceWith( uploadPhoto = uploadPhoto.clone(true));
-		$("#upload-photo-preview").attr("src","");
-		$("#upload-file").parent().css("display","inline-block");
-	}))
-	$("#user-post-ul > li > div").click(showPhotoDetail);
+    if ($("#upload-photo-button").on("click", function () {
+        $("#upload-file").replaceWith(uploadPhoto = uploadPhoto.clone(true));
+        $("#upload-photo-preview").attr("src", "");
+        $("#upload-file").parent().css("display", "inline-block");
+    }))
+        $("#user-post-ul > li > div").click(showPhotoDetail);
     if ($("#upload-file").length)
     {
-        $("#upload-file").change(function(){
-        	if($("#upload-file").css("display")!="none")	
-        	{	
-        		changeFile();
-        		$("#upload-file").parent().css("display","none");
-        	}
+        $("#upload-file").change(function () {
+            if ($("#upload-file").css("display") != "none")
+            {
+                changeFile();
+                $("#upload-file").parent().css("display", "none");
+            }
         });
     }
 
     if ($("#upload-icon-container"))
     {
-    	$("#upload-icon").change(function(){changeIcon();showEditForm("changeIcon")});
+        $("#upload-icon").change(function () {
+            changeIcon();
+            showEditForm("changeIcon")
+        });
     }
 
     //clear the signs when input login information
@@ -45,9 +48,9 @@ $(window).resize(function () {
 });
 $(window).load(function () {
     sizeAdjustor();
-    if($("#user-info-icon-img").length)
-    	iconCache=$("#user-info-icon-img").attr("src");
-    uploadPhoto=$("#upload-file");
+    if ($("#user-info-icon-img").length)
+        iconCache = $("#user-info-icon-img").attr("src");
+    uploadPhoto = $("#upload-file");
 });
 //adjust size when loading or windows changed
 function sizeAdjustor()
@@ -84,10 +87,10 @@ function sizeAdjustor()
 
 function showEditForm(event)
 {
-    if (event == "changeName" || event == "changePW" || event=="changeIcon" || event == "close")
+    if (event == "changeName" || event == "changePW" || event == "changeIcon" || event == "close")
     {
         $("#user-info-edit-a").css("display", "none");
-        $("#upload-icon-container").css("display","block");
+        $("#upload-icon-container").css("display", "block");
         switch (event) {
             case "changeName":
                 $("#user-info-change-pw").css("display", "none");
@@ -100,19 +103,19 @@ function showEditForm(event)
                 $("#user-info-change-name").css("display", "none");
                 break;
             case "changeIcon":
-            	$("#user-info-change-pw").css("display", "none");
+                $("#user-info-change-pw").css("display", "none");
                 $("#user-info-name").css("display", "none");
                 $("#user-info-change-name").css("display", "none");
-                $("#user-info-icon-footer").css("display","block");
+                $("#user-info-icon-footer").css("display", "block");
                 break;
             case "close":
                 $("#user-info-change-pw").css("display", "none");
                 $("#user-info-name").css("display", "block");
                 $("#user-info-change-name").css("display", "none");
-                $("#upload-icon-container").css("display","none");
-                $("#user-info-icon-footer").css("display","none");
+                $("#upload-icon-container").css("display", "none");
+                $("#user-info-icon-footer").css("display", "none");
                 $("#user-info-edit-a").css("display", "block");
-                $("#user-info-icon-img").attr("src",iconCache);
+                $("#user-info-icon-img").attr("src", iconCache);
                 break;
         }
     }
@@ -403,7 +406,7 @@ function changeFile()
     var pic = document.getElementById("upload-photo-preview");
     var file = document.getElementById("upload-file");
     var ext = file.value.substring(file.value.lastIndexOf(".") + 1).toLowerCase();
-    
+
     // gif在IE浏览器暂时无法显示
     if (ext != 'png' && ext != 'jpg' && ext != 'jpeg' && ext != 'gif') {
         alert("文件必须为图片！");
@@ -550,40 +553,83 @@ function showSuccess(event)
 //dice
 function dice()
 {
-	var type=$("#dice-category").val();
-	var resultText="result";//get from server side
-	var resultHref="http://www.google.com";//get from server side
+    var type = $("#dice-category").val();
+    var resultText = "result";//get from server side
+    var resultHref = "http://www.google.com";//get from server side
 
-	var intervalIndex=0;
+    var intervalIndex = 0;
 
-	var pesudoResults = ["tip1","tip2","tip3","tip4","tip5","tip6","tip7","tip8"];
-	var pesudoLength=pesudoResults.length;
+    var pesudoResults = ["tip1", "tip2", "tip3", "tip4", "tip5", "tip6", "tip7", "tip8"];
+    var pesudoLength = pesudoResults.length;
 
-	showResult();
-	function showResult()
-	{
-		$("#diceResult").html(pesudoResults[Math.floor(Math.random()*pesudoLength)]);
+    showResult();
+    function showResult()
+    {
+        $("#diceResult").html(pesudoResults[Math.floor(Math.random() * pesudoLength)]);
 
-		var timeInterval;
-		if(intervalIndex<=10)
-			timeInterval=200;
-		else
-			timeInterval=200+100*(intervalIndex-10);
+        var timeInterval;
+        if (intervalIndex <= 10)
+            timeInterval = 200;
+        else
+            timeInterval = 200 + 100 * (intervalIndex - 10);
 
-		intervalIndex++;
+        intervalIndex++;
 
-		if(intervalIndex<=13)
-			setTimeout(function(){showResult()},timeInterval);
-		else
-		{
-			$("#diceResult").attr("href",resultHref);
-			$("#diceResult").html(resultText+"<span class='glyphicon glyphicon-chevron-right'></span>");
-		}
-	}
+        if (intervalIndex <= 13)
+            setTimeout(function () {
+                showResult()
+            }, timeInterval);
+        else
+        {
+            $("#diceResult").attr("href", resultHref);
+            $("#diceResult").html(resultText + "<span class='glyphicon glyphicon-chevron-right'></span>");
+        }
+    }
+}
+
+function showPost()
+{
+    $.ajax({
+        url: "/gourylls/user/showpost",
+        //data: {id: photoId},
+        type: "POST",
+        dataType: "html",
+        success: function (post) {
+            $("#photo-detail-block").replaceWith(post);
+            $("#user-post-ul > li > div").click(showPhotoDetail);
+        },
+        error: function (xhr, status, errorThrown) {
+            alert("Sorry, there was a problem!");
+            console.log("Error: " + errorThrown);
+            console.log("Status: " + status);
+            console.dir(xhr);
+        }
+    });
 }
 
 function showPhotoDetail(event)
 {
-	var photoId = event.target.id;//get the id of clicked photo
-	
+    var photoId = event.target.id;//get the id of clicked photo
+    $.ajax({
+        // The URL for the request
+        url: "/gourylls/user/showdetail",
+        // The data to send (will be converted to a query string)
+        data: {id: photoId},
+        // Whether this is a POST or GET request
+        type: "POST",
+        // The type of data we expect back
+        dataType: "html",
+        // Code to run if the request succeeds;
+        // the response is passed to the function
+        success: function (pic) {
+            $("#user-post").replaceWith(pic);
+            sizeAdjustor();
+        },
+        error: function (xhr, status, errorThrown) {
+            alert("Sorry, there was a problem!");
+            console.log("Error: " + errorThrown);
+            console.log("Status: " + status);
+            console.dir(xhr);
+        }
+    });
 }

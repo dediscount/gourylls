@@ -3,8 +3,8 @@
 		<!--The navigation bar on the top-->
 		<div id="user-nav" class="navbar-top navbar-user " style="margin:0;">
 			<ul class="nav navbar-nav navbar-top-ul navbar-found-ul">
-				<li class="navbar-found-active">
-					<a href="#">POST</a><!--reload-->
+				<li class="navbar-found-active" onclick="showPost()">
+					<a href="#" >POST</a><!--reload-->
 				</li>
 				<!-- Add more lists when necessary
 				<li>
@@ -118,33 +118,12 @@
 				</div>
 			</div><!--/.user-info-->
 
-			<?php //require_once('post.php') ?>
-			<div id="photo_id" >
-				<div id="photo-detail">
-					<div>
-						<div class="photo-detail-title">
-							<h1>Title</h1>
-						</div>
-						<button type="button" data-toggle='modal' href='#delete-photo-dialog' class="btn btn-danger pull-right btn-delete">DELETE</button>
-					</div>
-					<div class="photo-detail-photo" style="background-image:url('/gourylls/public/user/userid/photos/korean.jpg')">	
-					</div>
-					<div class="photo-detail-footer">
-						<span class="description">Description</span>
-						<span class="pull-right">1 day ago</span>
-					</div>
-					<div>
-						
-						<ul class="like-list">
-							<li><span class="glyphicon glyphicon-heart found-photo-footer-heart-full"></span></li>
-							<li><a href="#">user1</a></li>
-							<li><a href="#">user2</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
+			<?php require_once('post.php') ?>
+                        <?php //require_once('photo.php') ?>
 
-			<div class="modal fade" id="delete-photo-dialog">
+		</div><!--/.user-content-container-->
+	</div><!--/.user-container-->
+<div class="modal fade" id="delete-photo-dialog">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header" style="padding-bottom:0">
@@ -161,5 +140,3 @@
 					</div><!-- /.modal-content -->
 				</div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
-		</div><!--/.user-content-container-->
-	</div><!--/.user-container-->

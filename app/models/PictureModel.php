@@ -46,7 +46,7 @@ class PictureModel extends Model {
     public function getPicturesByUser($userID) {
         $conn = $this->getConnection();
         $stmt = [];
-        if (!($stmt = $conn->prepare("select id,pic_path from gourylls.pictures where userID = (?)"))) {
+        if (!($stmt = $conn->prepare("select id,pic_path from gourylls.pictures where userID = (?) order by id desc"))) {
             echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
         }
         if (!$stmt->bind_param("i", $userID)) {
@@ -56,5 +56,20 @@ class PictureModel extends Model {
             echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
         }
         return $stmt->get_result();
+    }
+    public function getPictureByID($ID)
+    {
+        $conn = $this->getConnection();
+        $stmt = [];
+        if (!($stmt = $conn->prepare("select id,pic_path,title,description,uploadingdate,likes from gourylls.pictures where ID = (?)"))) {
+            echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+        }
+        if (!$stmt->bind_param("i", $ID)) {
+            echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        if (!$stmt->execute()) {
+            echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        return $stmt->get_result()->fetch_assoc();
     }
 }
