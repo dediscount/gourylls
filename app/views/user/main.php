@@ -135,7 +135,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="button" onclick="deletePicture()" class="btn btn-danger">DELETE</button>
+							<button type="button" onclick="deletePicture()" data-dismiss="modal" class="btn btn-danger">DELETE</button>
 						</div>
 					</div><!-- /.modal-content -->
 				</div><!-- /.modal-dialog -->
