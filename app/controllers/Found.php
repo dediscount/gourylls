@@ -6,7 +6,7 @@ class Found extends Controller {
         $user = $this->model('User');
         $pics = $this->model("Picture");
         $pic = $pics->getPictureByRow(0);
-        $this->view('found/index', ['account' => $user->account, 'iconPath' => $user->iconPath, 'title' => $pic['title'], 'picPath' => $pic['pic_path'], 'description' => $pic['description'], 'p_iconPath' => $pic['icon_path'], 'date' => $pic['uploadingDate']]);
+        $this->view('found/index', ['account' => $user->account, 'iconPath' => $user->iconPath, 'title' => $pic['title'],'picID'=>$pic['ID'] ,'picPath' => $pic['pic_path'], 'description' => $pic['description'], 'p_iconPath' => $pic['icon_path'], 'date' => $pic['uploadingDate']]);
     }
 
     public function loadMore() {
