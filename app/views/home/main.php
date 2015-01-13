@@ -12,11 +12,11 @@
 			<button type="button" class="btn btn-hue btn-dice" onclick="dice()">Click to dice</button>
 		  </div>
 		  <div class="btn-group" style="width:70px" role="group">
-			<button type="button" class="btn btn-hue btn-home">
-				<a href="found" title="Find more">
-					<span class="glyphicon glyphicon-home" style="color:#FFF"></span>
-				</a>
-			</button>
+			<a href="found" title="Find more">
+				<button type="button" class="btn btn-hue btn-home">	
+						<span class="glyphicon glyphicon-home" style="color:#FFF"></span>	
+				</button>
+			</a>
 		  </div>
 		</div>
 			<!--goto home when clicked-->
