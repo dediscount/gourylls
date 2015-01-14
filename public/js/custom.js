@@ -695,7 +695,7 @@ function showPost()
         success: function (post) {
             $("#photo-detail-block").replaceWith(post);
             $("#user-post-ul > li > div").click(showPhotoDetail);
-            $(".user-info-stats-ul > li:nth-of-type(2) > i").html($(".user-info-stats-ul > li:nth-of-type(2) > i").html()-1);
+            
         },
         error: function (xhr, status, errorThrown) {
             alert("Sorry, there was a problem!");
@@ -754,6 +754,7 @@ function deletePicture()
         success: function (post) {
             $("#photo-detail-block").replaceWith(post);
             $("#user-post-ul > li > div").click(showPhotoDetail);
+            $(".user-info-stats-ul > li:nth-of-type(2) > i").html($(".user-info-stats-ul > li:nth-of-type(2) > i").html()-1);
         },
         error: function (xhr, status, errorThrown) {
             alert("Sorry, there was a problem!");
