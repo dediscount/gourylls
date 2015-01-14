@@ -3,7 +3,7 @@
     <div id="found-content-nav" class="navbar-top navbar-found " style="margin:0;">
         <ul class="nav navbar-nav navbar-top-ul navbar-found-ul">
             <li class="navbar-found-active">
-                <a href="#">New</a><!--reload-->
+                <a href="/gourylls/found">New</a><!--reload-->
             </li>
             <!-- Add more lists when necessary
             <li>

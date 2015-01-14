@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-01-13 20:59:21
+-- Generation Time: 2015-01-14 21:51:48
 -- 服务器版本： 5.6.16
 -- PHP Version: 5.5.11
 
@@ -112,25 +112,12 @@ CREATE TABLE IF NOT EXISTS `likes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `likes`
---
-
-INSERT INTO `likes` (`picID`, `userID`) VALUES
-(1011, 249340);
-
---
 -- 触发器 `likes`
 --
-DROP TRIGGER IF EXISTS `autoDecreaseLike`;
-DELIMITER //
-CREATE TRIGGER `autoDecreaseLike` AFTER DELETE ON `likes`
- FOR EACH ROW update pictures set pictures.favor=pictures.favor-1 where pictures.ID=old.picID
-//
-DELIMITER ;
 DROP TRIGGER IF EXISTS `autoIncreaseLike`;
 DELIMITER //
 CREATE TRIGGER `autoIncreaseLike` AFTER INSERT ON `likes`
- FOR EACH ROW update pictures set pictures.favor=pictures.favor+1 where pictures.ID=new.picID
+ FOR EACH ROW update pictures set pictures.likes=pictures.likes+1 where pictures.ID=new.picID
 //
 DELIMITER ;
 
@@ -153,19 +140,7 @@ CREATE TABLE IF NOT EXISTS `pictures` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID` (`ID`,`pic_path`),
   KEY `userID` (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1030 ;
-
---
--- 转存表中的数据 `pictures`
---
-
-INSERT INTO `pictures` (`ID`, `pic_path`, `title`, `description`, `format`, `size`, `uploadingDate`, `userID`, `likes`) VALUES
-(1011, 'www.jiji.com', 'myDick', 'huge', '.jpg', 24, '2015-01-06 10:43:16', 249340, 1),
-(1024, '/gourylls/public/uploads/249341/pictures/1421154722Wonderland4.jpg', 'Red', 'Red\r\n', 'jpg', 86, '2015-01-13 13:12:02', 249341, 0),
-(1025, '/gourylls/public/uploads/249341/pictures/1421157373Wonderland1.jpg', 'Yellow', 'Yellow\r\n', 'jpg', 93, '2015-01-13 13:56:13', 249341, 0),
-(1027, '/gourylls/public/uploads/249342/pictures/1421159948Wonderland6.jpg', 'Mushroom', 'Mushroom', 'jpg', 93, '2015-01-13 14:39:09', 249342, 0),
-(1028, '/gourylls/public/uploads/249341/pictures/1421179064Wonderland3.jpg', 'c', 'c', 'jpg', 109, '2015-01-13 19:57:44', 249341, 0),
-(1029, '/gourylls/public/uploads/249341/pictures/1421179097Wonderland9.jpg', 't', 't', 'jpg', 119, '2015-01-13 19:58:17', 249341, 0);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1019 ;
 
 --
 -- 触发器 `pictures`
@@ -202,16 +177,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `icon_path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID` (`ID`,`name`,`account`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=249343 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=249345 ;
 
 --
 -- 转存表中的数据 `user`
 --
 
 INSERT INTO `user` (`ID`, `name`, `account`, `password`, `numOfPhotos`, `register_date`, `icon_path`) VALUES
-(249340, 'wei', '350122', '111111', 24, '2015-01-06 10:42:40', 'sdsdsds'),
-(249341, 'Shen_Yifei', 'shen-xx@qq.com', 'qwerqwer', 4, '2015-01-12 20:29:36', '/gourylls/public/uploads/249341/icon.jpg'),
-(249342, 'YYYFFF', 'qq429515154@gmail.com', 'qwerqwer', 1, '2015-01-13 14:20:51', '/gourylls/public/uploads/249342/icon.jpg');
+(249343, 'YifeiShen', 'shen@yifei.com', 'qwerqwer', 0, '2015-01-14 20:50:46', NULL);
 
 --
 -- 限制导出的表

@@ -15,23 +15,31 @@
         <p><?= $data['pic']['description'] ?></p>
     </div>
     <div class="found-photo-footer">
-        <span class="found-photo-footer-heart" onclick="clickheart(this)">
-            <span>Like</span> <!-- Default: like; change innerHTML into dislike when clicked-->
-            <?php
-            if ($data['liked']) {
-                ?>
-                <span name="like-empty" class="glyphicon glyphicon-heart found-photo-footer-heart-empty" style="display:none"></span>
-                <span name="like-full" class="glyphicon glyphicon-heart found-photo-footer-heart-full" style="display:inline-block"></span><!--display when like-->
 
-                <?php
-            } else {
+        <?php if ($this->isLoggedIn()) { ?>
+            <span class="found-photo-footer-heart" onclick="clickheart(this)">
+                <span>Like</span>
+                <?php if ($data['liked']) {
+                    ?>
+                    <span name="like-empty" class="glyphicon glyphicon-heart found-photo-footer-heart-empty" style="display:none"></span>
+                    <span name="like-full" class="glyphicon glyphicon-heart found-photo-footer-heart-full" style="display:inline-block"></span><!--display when like-->
+
+                    <?php
+                } else {
+                    ?>
+                    <span name="like-empty" class="glyphicon glyphicon-heart found-photo-footer-heart-empty" style="display: inline-block"></span><!--default; display when dislike-->
+                    <span name="like-full" class="glyphicon glyphicon-heart found-photo-footer-heart-full" style="display: none"></span><!--display when like-->                
+                <?php }
                 ?>
-                <span name="like-empty" class="glyphicon glyphicon-heart found-photo-footer-heart-empty" style="display: inline-block"></span><!--default; display when dislike-->
-                <span name="like-full" class="glyphicon glyphicon-heart found-photo-footer-heart-full" style="display: none"></span><!--display when like-->                
-                <?php
-            }
-            ?>
-        </span>
+            </span><?php } else {
+                ?>
+            <span class="found-photo-footer-heart" href="#loginModal" data-toggle="modal">
+                <span>Like</span>
+                <span name="like-empty" class="glyphicon glyphicon-heart found-photo-footer-heart-empty" style="display: inline-block"></span>
+            </span>
+        <?php }
+        ?>
+
         <span class="pull-right">
             <?= $data['pic']['uploadingDate'] ?>
         </span>
