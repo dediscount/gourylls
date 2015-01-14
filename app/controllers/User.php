@@ -101,4 +101,20 @@ class User extends Controller {
         $this->showPost();
     }
     
+    public function ID($userID)
+    {
+        $user=$this->user->getUserByID($userID);
+        $pics = $this->model("Picture");
+        $this->view('user/index', ['ID'=>$user['ID'], 'name' => $user['name'],'iconPath'=>$user['iconPath'],'likes'=>$user['likes'],'numOfPics'=>$user['numOfPics'],'pictures'=>$pics->getPicturesByUser($userID)]);
+    }
+    private function isCurrentUser($userID)
+    {
+        $current=false;
+        $user = $this->user;
+        if($user->ID==$userID)
+        {
+            $current=true;
+        }
+        return current;
+    }
 }

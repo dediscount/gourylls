@@ -8,7 +8,7 @@ class UserModel extends Model {
     public $iconPath = ICON_PNG;
     public $numOfPics;
 
-    public function __construct($data = []) {
+    public function __construct() {
         $conn = $this->getConnection();
         //var_dump($this->conn);
         if (isset($_SESSION["account"])) {
@@ -153,9 +153,8 @@ class UserModel extends Model {
         $sql = "update gourylls.user set icon_path='" . $this->getUserPath() . $iconName . "' where id='" . $this->ID . "';";
         $conn->query($sql);
     }
-    
-    public function isLiked($picID)
-    {
+
+    public function isLiked($picID) {
         $conn = $this->getConnection();
         $sql = "select * from gourylls.likes where picID = '" . $picID . "' and userID = '" . $this->ID . "';";
         if ($result = $conn->query($sql)) {
@@ -166,8 +165,8 @@ class UserModel extends Model {
             }
         }
     }
-    public function getLikes()
-    {
+
+    public function getLikes() {
         $conn = $this->getConnection();
         $sql = "select * from gourylls.likes where userID = '" . $this->ID . "';";
         $result = $conn->query($sql);
@@ -196,6 +195,46 @@ class UserModel extends Model {
         $conn = $this->getConnection();
         $sql = "delete from gourylls.likes where userID='" . $this->ID . "' and picID='" . $picID . "';";
         $conn->query($sql);
+    }
+
+    public function getUserByID($userID) {
+        $conn = $this->getConnection();
+        $user = array();
+        $user['ID'] = 0;
+        $user['name'] = 'User Not Found';
+        $user['iconPath'] = ICON_PNG;
+        $user['numOfPics'] = 0;
+
+        //var_dump($this->conn);
+        /*
+          public $account;
+          public $ID;
+          public $name;
+          public $iconPath = ICON_PNG;
+          public $numOfPics;
+         */
+        if (isset($userID)) {
+            $sql = "select name,id,icon_path,numOfPhotos from gourylls.user where ID='" . $userID . "';";
+            $result = $conn->query($sql);
+            if ($result->num_rows !== 0) {
+                while ($row = $result->fetch_assoc()) {
+                    //echo "id: " . $row["id"] . " - Name: " . $row["name"] . "<br>";
+                    $user['ID'] = $row['id'];
+                    $user['name'] = $row['name'];
+                    if ($row['icon_path'] != '') {
+                        $user['iconPath'] = $row['icon_path'];
+                    }
+                    $user['numOfPics'] = $row['numOfPhotos'];
+                }
+            }
+
+            $sql = "select * from gourylls.likes where userID = '" . $this->ID . "';";
+            $result = $conn->query($sql);
+            $user['likes'] = $result->num_rows;
+            return $user;
+        } else {
+            return false;
+        }
     }
 
 }

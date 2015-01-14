@@ -1,7 +1,7 @@
 <div id="<?= $data['picID'] ?>" class="found-photo-container"><!--iterate this container to display more photos-->
     <div class="found-photo-head">
         <h1 class="found-photo-title"><?= $data['title'] ?></h1>
-        <a class="found-photo-user" href="#"><img src="<?= $data['p_iconPath'] ?>" class="img-circle found-photo-user-icon" title="username"></a>
+        <a class="found-photo-user" href="/gourylls/user/id/<?=$data['userID']?>"><img src="<?= $data['p_iconPath'] ?>" class="img-circle found-photo-user-icon" title="username"></a>
     </div>
     <div class="found-photo-content" style="background-image:url('<?= $data['picPath'] ?>')">
     </div>
