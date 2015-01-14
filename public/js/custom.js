@@ -1,19 +1,23 @@
-var loadPic=1;
+var loadPic = 0;
 var iconCache;
 var uploadPhoto;
-$("document").ready(function () {
 
-	//
-	if ($("#upload-photo-button").on("click",function(){
-		$("#upload-file").replaceWith( uploadPhoto = uploadPhoto.clone(true));
-		$("#upload-photo-preview").attr("src","");
-		$("#upload-file").parent().css("display","inline-block");
-	}))
-	//
-	$("#user-post-ul > li > div").click(showPhotoDetail);
-	//
-	$(".found-photo-user").click(showUserDetail);
-	//
+
+$("document").ready(function () {
+    $(window).unload(function(){
+    document.body.scrollTop=document.documentElement.scrollTop=0;
+    })
+        //
+    if ($("#upload-photo-button").on("click", function () {
+        $("#upload-file").replaceWith(uploadPhoto = uploadPhoto.clone(true));
+        $("#upload-photo-preview").attr("src", "");
+        $("#upload-file").parent().css("display", "inline-block");
+    }))
+        //
+        $("#user-post-ul > li > div").click(showPhotoDetail);
+    //
+    $(".found-photo-user").click(showUserDetail);
+    //
 
     if ($("#upload-file").length)
     {
@@ -54,6 +58,7 @@ $(window).resize(function () {
     sizeAdjustor();
 });
 $(window).load(function () {
+    loadmore();
     sizeAdjustor();
     if ($("#user-info-icon-img").length)
         iconCache = $("#user-info-icon-img").attr("src");
@@ -141,7 +146,6 @@ function clickheart(event)
 {
     var children = event.getElementsByTagName('span');
     var photoid = event.parentNode.parentNode.id;//the id of photo, user this to update
-
     if (children[1].style.display == "inline-block" && children[2].style.display == "none")//if empty
     {
         children[1].style.display = "none";
@@ -150,15 +154,47 @@ function clickheart(event)
          * like +1 with the photoid given above
          * insert a message in table 'like' with the photoid and userid
          **/
+        $.ajax({
+            // The URL for the request
+            url: "/gourylls/found/like",
+            // The data to send (will be converted to a query string)
+            data: {picID: photoid},
+            // Whether this is a POST or GET request
+            type: "POST",
+            error: function (xhr, status, errorThrown) {
+                alert("Sorry, there was a problem!");
+                console.log("Error: " + errorThrown);
+                console.log("Status: " + status);
+                console.dir(xhr);
+            }
+            // Code to run regardless of success or failure
+        });
+
     }
     else if (children[1].style.display == "none" && children[2].style.display == "inline-block")//if full
     {
         children[1].style.display = "inline-block";
         children[2].style.display = "none";
+        alert(photoid);
         /**
          * like -1 with the photoid given above 
          * delete the message in table 'like' with the photoid and userid
          **/
+        $.ajax({
+            // The URL for the request
+            url: "/gourylls/found/dislike",
+            // The data to send (will be converted to a query string)
+            data: {picID: photoid},
+            // Whether this is a POST or GET request
+            type: "POST",
+            error: function (xhr, status, errorThrown) {
+                alert("Sorry, there was a problem!");
+                console.log("Error: " + errorThrown);
+                console.log("Status: " + status);
+                console.dir(xhr);
+            }
+            // Code to run regardless of success or failure
+        });
     }
 }
 
@@ -275,37 +311,46 @@ function signin()
     });
     return false;
 }
-
+var num = 0;
 function loadmore()
 {
+    if (loadPic > -1)
+    {
+        loadPic += 1;
 
-    $.ajax({
-        // The URL for the request
-        url: "/gourylls/found/loadmore",
-        // The data to send (will be converted to a query string)
-        data:{num:loadPic},
-        // Whether this is a POST or GET request
-        type: "POST",
-        // The type of data we expect back
-        dataType: "html",
-        // Code to run if the request succeeds;
-        // the response is passed to the function
-        success: function (html) {
-            $("#loadmore").before(html);
-            sizeAdjustor();
-            loadPic+=1;
-        },
-        // Code to run if the request fails; the raw request and
-        // status codes are passed to the function
-        error: function (xhr, status, errorThrown) {
-            alert("Sorry, there was a problem!");
-            console.log("Error: " + errorThrown);
-            console.log("Status: " + status);
-            console.dir(xhr);
-        }
-        // Code to run regardless of success or failure
+        $.ajax({
+            // The URL for the request
+            url: "/gourylls/found/loadmore",
+            // The data to send (will be converted to a query string)
+            data: {num: loadPic},
+            // Whether this is a POST or GET request
+            type: "POST",
+            // The type of data we expect back
+            dataType: "html",
+            // Code to run if the request succeeds;
+            // the response is passed to the function
+            success: function (html) {
+                //alert(loadPic);
+                $("#loadmore").before(html);
+                sizeAdjustor();
+                num++;
+                if (num < 5)
+                {
 
-    });
+                    loadmore();
+                }
+            },
+            // Code to run if the request fails; the raw request and
+            // status codes are passed to the function
+            error: function (xhr, status, errorThrown) {
+                alert("Sorry, there was a problem!");
+                console.log("Error: " + errorThrown);
+                console.log("Status: " + status);
+                console.dir(xhr);
+            }
+            // Code to run regardless of success or failure
+        });
+    }
 
 }
 
@@ -416,8 +461,8 @@ function changeFile()
     var ext = file.value.substring(file.value.lastIndexOf(".") + 1).toLowerCase();
 
     // gif在IE浏览器暂时无法显示
-    if (ext != 'png' && ext != 'jpg' && ext != 'jpeg' && ext != 'gif') {
-        alert("文件必须为图片！");
+    if (ext !== 'png' && ext !== 'jpg' && ext !== 'jpeg' && ext !== 'gif' && ext !== 'bmp') {
+        alert("File must be a picture！");
         return;
     }
     // IE浏览器
@@ -560,32 +605,33 @@ function showSuccess(event)
 function dice()
 {
     var type = $("#dice-category").val();
-    switch(type)
+    switch (type)
     {
         case "breakfast":
-            type=1;
+            type = 1;
             break;
         case "lunch":
-            type=2;
+            type = 2;
             break;
         case "dinner":
-            type=3;
+            type = 3;
             break;
         case"nightSnack":
-            type=4;
+            type = 4;
             break;
         default:
-            type=0;
+            type = 0;
     }
-    var food=[];
-    var resultText = "result";//get from server side
+    var food = [];
+
+    var resultText;//get from server side
     var resultHref = "http://www.google.com";//get from server side
 
     var intervalIndex = 0;
 
     var pesudoResults;
     var pesudoLength;
-    
+
     $.ajax({
         url: "/gourylls/home/dice",
         data: {category: type},
@@ -593,17 +639,19 @@ function dice()
         dataType: "text",
         success: function (tips) {
             alert(tips);
-            var obj=$.parseJSON(tips);
+            var obj = $.parseJSON(tips);
             var i;
-            for(i=0; i<obj.tips.length;i++)
+            for (i = 0; i < obj.tips.length; i++)
             {
-                food[i]=obj.tips[i].name;
+                food[i] = obj.tips[i].name;
                 //alert(food[i]);
             }
             pesudoResults = food;
             pesudoLength = pesudoResults.length;
-            resultText = "result";
-            resultHref = "http://www.google.com";
+
+            var r = Math.floor(Math.random() * pesudoLength);
+            resultText = obj.tips[r].name;
+            resultHref = obj.tips[r].recipe_link;
             showResult();
         },
         error: function (xhr, status, errorThrown) {
@@ -659,7 +707,7 @@ function showPost()
 
 function showPhotoDetail(event)
 {
-
+    
     var photoId = event.target.id;//get the id of clicked photo
     $.ajax({
         // The URL for the request
@@ -684,11 +732,11 @@ function showPhotoDetail(event)
         }
     });
 
-	
+
 }
 function showUserDetail(event)
 {
-	var photoId = $(event.target).parents(".found-photo-container").attr("id");
+    var photoId = $(event.target).parents(".found-photo-container").attr("id");
 }
 
 function deletePicture()
@@ -713,5 +761,5 @@ function deletePicture()
             console.dir(xhr);
         }
     });
-    
+
 }

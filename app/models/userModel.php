@@ -7,6 +7,7 @@ class UserModel extends Model {
     public $name;
     public $iconPath = ICON_PNG;
     public $numOfPics;
+
     public function __construct($data = []) {
         $conn = $this->getConnection();
         //var_dump($this->conn);
@@ -32,9 +33,8 @@ class UserModel extends Model {
             }
         }
     }
-    
-    public function findUserByID($ID)
-    {
+
+    public function findUserByID($ID) {
         $conn = $this->getConnection();
         if (!($stmt = $conn->prepare("select * from gourylls.user where ID = (?)"))) {
             echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
@@ -47,9 +47,9 @@ class UserModel extends Model {
         }
         return $stmt->get_result();
     }
-    
-    public function getPicturePath(){
-        return $this->getUserPath().'pictures/';
+
+    public function getPicturePath() {
+        return $this->getUserPath() . 'pictures/';
     }
 
     public function changeName($account, $name) {
@@ -125,16 +125,14 @@ class UserModel extends Model {
         $this->mkUserMapping();
         move_uploaded_file($tempName, $location . '/' . $fileName);
     }
-    
-    private function mkUserMapping()
-    {
+
+    private function mkUserMapping() {
         $this->newDirectory($this->getUserMapping());
-        $this->newDirectory($this->getUserMapping().'/pictures');
+        $this->newDirectory($this->getUserMapping() . '/pictures');
     }
-    
-    private function getPictureMapping()
-    {
-        return $this->getUserMapping().'/pictures';
+
+    private function getPictureMapping() {
+        return $this->getUserMapping() . '/pictures';
     }
 
     private function newDirectory($location) {
@@ -153,6 +151,50 @@ class UserModel extends Model {
     private function changeIconPath($iconName) {
         $conn = $this->getConnection();
         $sql = "update gourylls.user set icon_path='" . $this->getUserPath() . $iconName . "' where id='" . $this->ID . "';";
+        $conn->query($sql);
+    }
+    
+    public function isLiked($picID)
+    {
+        $conn = $this->getConnection();
+        $sql = "select * from gourylls.likes where picID = '" . $picID . "' and userID = '" . $this->ID . "';";
+        if ($result = $conn->query($sql)) {
+            if ($result->num_rows === 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+    public function getLikes()
+    {
+        $conn = $this->getConnection();
+        $sql = "select * from gourylls.likes where userID = '" . $this->ID . "';";
+        $result = $conn->query($sql);
+        return $result->num_rows;
+    }
+
+    public function like($picID) {
+        $conn = $this->getConnection();
+//        $sql="INSERT INTO gourylls.likes (picID,userID) VALUES ('".$picID."','".$this->ID."')";
+//        $conn->query($sql);
+
+        $stmt = [];
+        if (!($stmt = $conn->prepare("INSERT INTO gourylls.likes (picID,userID) VALUES (?,?)"))) {
+            echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+        }
+        if (!$stmt->bind_param("ii", $picID, $this->ID)) {
+            echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        if (!$stmt->execute()) {
+            echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        //echo $sql;
+    }
+
+    public function dislike($picID) {
+        $conn = $this->getConnection();
+        $sql = "delete from gourylls.likes where userID='" . $this->ID . "' and picID='" . $picID . "';";
         $conn->query($sql);
     }
 

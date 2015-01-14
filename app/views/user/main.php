@@ -107,7 +107,7 @@
 				<div class="user-info-stats">
 					<ul class="user-info-stats-ul">
 						<li>
-							<i>0</i><!--get the number of likes here-->
+							<i><?=$data['likes']?></i><!--get the number of likes here-->
 							<span>likes |</span>
 						</li>
 						<li>

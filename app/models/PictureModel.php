@@ -88,10 +88,10 @@ class PictureModel extends Model {
     }
 
     public function getPictureByRow($num) {
-
+//
         $conn = $this->getConnection();
         $stmt = [];
-        if (!($stmt = $conn->prepare("select * from gourylls.pictures inner join gourylls.user on pictures.userID=user.ID  order by uploadingdate desc LIMIT 1 OFFSET " . $num . ";"))) {
+        if (!($stmt = $conn->prepare("select user.ID as userID, pictures.ID as ID, pic_path,title,description,format,size,uploadingDate,userID,likes,name,account,password,numOfPhotos,icon_path from gourylls.pictures inner join gourylls.user on user.ID=pictures.userID  order by uploadingdate desc LIMIT 1 OFFSET " . $num . ";"))) {
             echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
         }
 //        if (!$stmt->bind_param("i", $num)) {
@@ -100,7 +100,29 @@ class PictureModel extends Model {
         if (!$stmt->execute()) {
             echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
         }
+//        foreach ($stmt->get_result()->fetch_assoc() as $key => $value) {
+//            echo $key."=".$value."<br/>";
+//        }
         return $stmt->get_result()->fetch_assoc();
+    }
+    
+    public function getLikedUserByPicID($ID)
+    {
+        $conn = $this->getConnection();
+        $stmt = [];
+        if (!($stmt = $conn->prepare("select name, user.ID as userID from gourylls.likes inner join gourylls.user on user.ID=likes.userID where picID='".$ID."'"))) {
+            echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+        }
+//        if (!$stmt->bind_param("i", $num)) {
+//            echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+//        }
+        if (!$stmt->execute()) {
+            echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+//        foreach ($stmt->get_result()->fetch_assoc() as $key => $value) {
+//            echo $key."=".$value."<br/>";
+//        }
+        return $stmt->get_result();
     }
 
 }

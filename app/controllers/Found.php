@@ -6,14 +6,17 @@ class Found extends Controller {
         $user = $this->model('User');
         $pics = $this->model("Picture");
         $pic = $pics->getPictureByRow(0);
-        $this->view('found/index', ['account' => $user->account, 'iconPath' => $user->iconPath, 'title' => $pic['title'],'picID'=>$pic['ID'] ,'picPath' => $pic['pic_path'], 'description' => $pic['description'], 'p_iconPath' => $pic['icon_path'], 'date' => $pic['uploadingDate']]);
+        $liked=$user->isLiked($pic['ID']);
+        $this->view('found/index', ['account' => $user->account, 'iconPath' => $user->iconPath, 'title' => $pic['title'],'picID'=>$pic['ID'] ,'picPath' => $pic['pic_path'], 'description' => $pic['description'], 'p_iconPath' => $pic['icon_path'], 'date' => $pic['uploadingDate'],'liked'=>$liked]);
     }
 
     public function loadMore() {
         if (isset($_POST['num'])) {
+            $user = $this->model('User');
             $pics = $this->model("Picture");
             $pic = $pics->getPictureByRow($_POST['num']);
-            $this->view('found/loadmore', ['title' => $pic['title'], 'picPath' => $pic['pic_path'], 'description' => $pic['description'], 'p_iconPath' => $pic['icon_path'], 'date' => $pic['uploadingDate']]);
+            $liked=$user->isLiked($pic['ID']);
+            $this->view('found/loadmore', ['title' => $pic['title'], 'picID'=>$pic['ID'],'picPath' => $pic['pic_path'], 'description' => $pic['description'], 'p_iconPath' => $pic['icon_path'], 'date' => $pic['uploadingDate'],'liked'=>$liked]);
         }
     }
 
@@ -39,6 +42,26 @@ class Found extends Controller {
                 $pic->addPicture($userID, $picPath, $title, $type, $size, $description);
                 echo "<script>window.location =\"/gourylls/found\";</script>";
             }
+        }
+    }
+    
+    public function like()
+    {
+        if($this->isLoggedIn())
+        {
+            $user = $this->model('User');
+            //echo $_POST['picID'];
+            $user->like($_POST['picID']);
+
+        }
+    }
+    
+    public function dislike()
+    {
+        if($this->isLoggedIn())
+        {
+            $user = $this->model('User');
+            $user->dislike($_POST['picID']);
         }
     }
 

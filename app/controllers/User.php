@@ -8,7 +8,7 @@ class User extends Controller {
     public function index() {//index function !!!!!!
         $user = $this->user;
         $pics = $this->model("Picture");
-        $this->view('user/index', ['ID'=>$user->ID, 'name' => $user->name,'iconPath'=>$user->iconPath,'numOfPics'=>$user->numOfPics,'pictures'=>$pics->getPicturesByUser($user->ID)]);
+        $this->view('user/index', ['ID'=>$user->ID, 'name' => $user->name,'iconPath'=>$user->iconPath,'likes'=>$user->getLikes(),'numOfPics'=>$user->numOfPics,'pictures'=>$pics->getPicturesByUser($user->ID)]);
     }
 
     public function changeName() {
@@ -78,9 +78,12 @@ class User extends Controller {
     }
     
     public function showDetail(){
+        
         $user = $this->user;
         $pics = $this->model("Picture");
-        $this->view("user/photo",$pics->getPictureByID($_POST['id']));
+        $picID=$_POST['id'];
+        $result=$pics->getLikedUserByPicID($picID);
+        $this->view("user/photo",['pic'=>$pics->getPictureByID($picID),'users'=>$result]);
         
         
     }
