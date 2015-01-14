@@ -4,7 +4,7 @@ class UserModel extends Model {
 
     public $account;
     public $ID;
-    public $name;
+    public $name='User Not Found';
     public $iconPath = ICON_PNG;
     public $numOfPics;
 
@@ -114,11 +114,11 @@ class UserModel extends Model {
     }
 
     private function getUserMapping() {
-        return UPLOAD_MAPPING . $this->ID . '/';
+        return UPLOAD_MAPPING . $this->ID.'/' ;
     }
 
     public function getUserPath() {
-        return UPLOAD_PATH . $this->ID . '/';
+        return UPLOAD_PATH . $this->ID.'/';
     }
 
     private function moveFile($tempName, $fileName, $location) {
@@ -132,17 +132,10 @@ class UserModel extends Model {
     }
 
     private function getPictureMapping() {
-        return $this->getUserMapping() . '/pictures';
+        return $this->getUserMapping() . '/pictures/';
     }
 
     private function newDirectory($location) {
-//        if(mkdir($location))
-//        {
-//            return;
-//        }else
-//        {
-//            $location=strrpos($location,'/');
-//        }        
         if (!file_exists($location)) {
             mkdir($location);
         }
@@ -195,6 +188,8 @@ class UserModel extends Model {
         $conn = $this->getConnection();
         $sql = "delete from gourylls.likes where userID='" . $this->ID . "' and picID='" . $picID . "';";
         $conn->query($sql);
+        $sql = "update pictures set pictures.likes=pictures.likes-1 where pictures.ID='" . $picID . "';";
+        $conn->query($sql);
     }
 
     public function getUserByID($userID) {
@@ -205,14 +200,6 @@ class UserModel extends Model {
         $user['iconPath'] = ICON_PNG;
         $user['numOfPics'] = 0;
 
-        //var_dump($this->conn);
-        /*
-          public $account;
-          public $ID;
-          public $name;
-          public $iconPath = ICON_PNG;
-          public $numOfPics;
-         */
         if (isset($userID)) {
             $sql = "select name,id,icon_path,numOfPhotos from gourylls.user where ID='" . $userID . "';";
             $result = $conn->query($sql);

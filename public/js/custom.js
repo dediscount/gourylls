@@ -1,13 +1,13 @@
-var loadPic = 0;
+var loadPic = -1;
 var iconCache;
 var uploadPhoto;
 
 
 $("document").ready(function () {
-    $(window).unload(function(){
-    document.body.scrollTop=document.documentElement.scrollTop=0;
+    $(window).unload(function () {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
     })
-        //
+    //
     if ($("#upload-photo-button").on("click", function () {
         $("#upload-file").replaceWith(uploadPhoto = uploadPhoto.clone(true));
         $("#upload-photo-preview").attr("src", "");
@@ -175,7 +175,7 @@ function clickheart(event)
     {
         children[1].style.display = "inline-block";
         children[2].style.display = "none";
-        alert(photoid);
+        //alert(photoid);
         /**
          * like -1 with the photoid given above 
          * delete the message in table 'like' with the photoid and userid
@@ -311,14 +311,16 @@ function signin()
     });
     return false;
 }
-var num = 0;
 function loadmore()
 {
-    if (loadPic > -1)
-    {
-        loadPic += 1;
+    var i = 0;
+    while (loadPic > -2 && i < 5)
 
+    {
+        i++;
+        loadPic++;
         $.ajax({
+            async: false,
             // The URL for the request
             url: "/gourylls/found/loadmore",
             // The data to send (will be converted to a query string)
@@ -333,12 +335,6 @@ function loadmore()
                 //alert(loadPic);
                 $("#loadmore").before(html);
                 sizeAdjustor();
-                num++;
-                if (num < 5)
-                {
-
-                    loadmore();
-                }
             },
             // Code to run if the request fails; the raw request and
             // status codes are passed to the function
@@ -638,7 +634,7 @@ function dice()
         type: "POST",
         dataType: "text",
         success: function (tips) {
-            alert(tips);
+            //alert(tips);
             var obj = $.parseJSON(tips);
             var i;
             for (i = 0; i < obj.tips.length; i++)
@@ -708,13 +704,13 @@ function showPost()
 
 function showPhotoDetail(event)
 {
-    
-    var photoId = event.target.id;//get the id of clicked photo
+    var photoId = event.target.id;
+    var userID=$("#user-info-icon>img").attr("title");
     $.ajax({
         // The URL for the request
         url: "/gourylls/user/showdetail",
         // The data to send (will be converted to a query string)
-        data: {id: photoId},
+        data: {id: photoId,userID:userID},
         // Whether this is a POST or GET request
         type: "POST",
         // The type of data we expect back
@@ -754,7 +750,7 @@ function deletePicture()
         success: function (post) {
             $("#photo-detail-block").replaceWith(post);
             $("#user-post-ul > li > div").click(showPhotoDetail);
-            $(".user-info-stats-ul > li:nth-of-type(2) > i").html($(".user-info-stats-ul > li:nth-of-type(2) > i").html()-1);
+            $(".user-info-stats-ul > li:nth-of-type(2) > i").html($(".user-info-stats-ul > li:nth-of-type(2) > i").html() - 1);
         },
         error: function (xhr, status, errorThrown) {
             alert("Sorry, there was a problem!");

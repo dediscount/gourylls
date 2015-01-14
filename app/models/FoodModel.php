@@ -5,7 +5,7 @@ class FoodModel extends Model{
         $conn=  $this->getConnection();
         $conn->query("SET NAMES UTF8;");//important
         $stmt = [];
-        if (!($stmt = $conn->prepare("select name, recipe_availability, recipe_link from gourylls.food where class like '" .$cate. "' LIMIT 10;"))) {
+        if (!($stmt = $conn->prepare("select name, recipe_availability, recipe_link from gourylls.food where class like '" .$cate. "' limit 40;"))) {
             echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
         }
 //        if (!$stmt->bind_param("i", $num)) {

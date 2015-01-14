@@ -43,8 +43,7 @@ class User extends Controller {
         } else if (isset($_FILES["picture"]["name"])) {            
             if ($this->isLoggedIn()) {
                 $user = $this->model('User');
-                $pic=  $this->model('Picture');
-                
+                $pic=  $this->model('Picture');                
                 $date=date_create();
                 $name = date_timestamp_get($date).$_FILES["picture"]["name"];
                 $type = substr($_FILES["picture"]["name"], strrpos($_FILES["picture"]["name"], '.') + 1);
@@ -82,8 +81,9 @@ class User extends Controller {
         $user = $this->user;
         $pics = $this->model("Picture");
         $picID=$_POST['id'];
+        $userID=$_POST['userID'];
         $result=$pics->getLikedUserByPicID($picID);
-        $this->view("user/photo",['pic'=>$pics->getPictureByID($picID),'users'=>$result]);
+        $this->view("user/photo",['pic'=>$pics->getPictureByID($picID),'users'=>$result,'ID'=>$userID]);
         
         
     }
@@ -107,7 +107,7 @@ class User extends Controller {
         $pics = $this->model("Picture");
         $this->view('user/index', ['ID'=>$user['ID'], 'name' => $user['name'],'iconPath'=>$user['iconPath'],'likes'=>$user['likes'],'numOfPics'=>$user['numOfPics'],'pictures'=>$pics->getPicturesByUser($userID)]);
     }
-    private function isCurrentUser($userID)
+    public function isCurrentUser($userID)
     {
         $current=false;
         $user = $this->user;
@@ -115,6 +115,6 @@ class User extends Controller {
         {
             $current=true;
         }
-        return current;
+        return $current;
     }
 }

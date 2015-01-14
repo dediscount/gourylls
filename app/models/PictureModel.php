@@ -89,9 +89,11 @@ class PictureModel extends Model {
 
     public function getPictureByRow($num) {
 //
+        
         $conn = $this->getConnection();
         $stmt = [];
-        if (!($stmt = $conn->prepare("select user.ID as userID, pictures.ID as ID, pic_path,title,description,format,size,uploadingDate,userID,likes,name,account,password,numOfPhotos,icon_path from gourylls.pictures inner join gourylls.user on user.ID=pictures.userID  order by uploadingdate desc LIMIT 1 OFFSET " . $num . ";"))) {
+        //echo "select user.ID as userID, pictures.ID as ID, pic_path,title,description,format,size,uploadingDate,userID,likes,name,account,password,numOfPhotos,icon_path from gourylls.pictures inner join gourylls.user on user.ID=pictures.userID order by uploadingdate desc LIMIT 1 OFFSET " . $num . ";";
+        if (!($stmt = $conn->prepare("select user.ID as userID, pictures.ID as ID, pic_path,title,description,format,size,uploadingDate,userID,likes,name,account,password,numOfPhotos,icon_path from gourylls.pictures inner join gourylls.user on user.ID=pictures.userID order by uploadingdate desc LIMIT 1 OFFSET " . $num . ";"))) {
             echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
         }
 //        if (!$stmt->bind_param("i", $num)) {
@@ -103,7 +105,14 @@ class PictureModel extends Model {
 //        foreach ($stmt->get_result()->fetch_assoc() as $key => $value) {
 //            echo $key."=".$value."<br/>";
 //        }
-        return $stmt->get_result()->fetch_assoc();
+        $result=$stmt->get_result();
+        if($result->num_rows===0)
+        {
+            return false;
+        }  else {
+            return $result->fetch_assoc();
+        }
+
     }
     
     public function getLikedUserByPicID($ID)

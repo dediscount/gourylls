@@ -1,21 +1,21 @@
 <?php
 //http://localhost/gourylls
 if (!defined('PATH')) {
-    define('PATH', '/gourylls');
+    define('PATH', '/gourylls/');
 }
 if (!defined('JS_PATH')) {
-    define('JS_PATH', PATH . '/public/js/');
+    define('JS_PATH', PATH . 'public/js/');
 }
 if (!defined('CSS_PATH')) {
-    define('CSS_PATH', PATH . '/public/css/');
+    define('CSS_PATH', PATH . 'public/css/');
 }
 
 if (!defined('UPLOAD_PATH')) {
-    define('UPLOAD_PATH', PATH . '/public/uploads/');
+    define('UPLOAD_PATH', PATH . 'public/uploads/');
 }
 
 if (!defined('ICON_PNG')) {
-    define('ICON_PNG', PATH . '/public/uploads/default_icon.png');
+    define('ICON_PNG', PATH . 'public/uploads/default_icon.png');
 }
 
 //D:/xampp/htdocs/gourylls/...

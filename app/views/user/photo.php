@@ -4,7 +4,12 @@
             <div class="photo-detail-title">
                 <h1><?= $data['pic']['title'] ?></h1>
             </div>
-            <button type="button" data-toggle='modal' href='#delete-photo-dialog' class="btn btn-danger pull-right btn-delete">DELETE</button>
+            <?php
+            if ($this->isCurrentUser($data['ID'])) {
+                ?>
+                <button type="button" data-toggle='modal' href='#delete-photo-dialog' class="btn btn-danger pull-right btn-delete">DELETE</button><?php
+        }
+            ?>
         </div>
         <div id="<?= $data['pic']['id'] ?>" class="photo-detail-photo" style="background-image:url('<?= $data['pic']['pic_path'] ?>')">	
         </div>
@@ -22,11 +27,11 @@
                     //echo $result['name'].$result['userID'];
                     ?>
                     <li><a href="<?php
-                        echo PATH . 'user/id/' . $result['userID'];
-                        ?>"><?php
-                               echo $result['name'];
-                               ?></a></li>
-                    <?php
+                echo PATH . 'user/id/' . $result['userID'];
+                    ?>"><?php
+                           echo $result['name'];
+                           ?></a></li>
+                            <?php
                 }
                 ?>
 

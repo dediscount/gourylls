@@ -12,7 +12,13 @@
 				</li>
 				-->
 				<!--upload photo-->
-				<div id="upload-photo-button" class="glyphicon glyphicon-plus pull-right navbar-found-upload-icon navbar-found-upload" data-toggle="modal" href="#uploadModal">
+				<div id="upload-photo-button" class="glyphicon glyphicon-plus pull-right navbar-found-upload-icon navbar-found-upload" data-toggle="modal" href="#<?php
+            if ($this->isLoggedIn()) {
+                echo 'uploadModal';
+            } else {
+                echo 'loginModal';
+            }
+            ?>">
 					
 				</div>
 			</ul>
@@ -23,7 +29,7 @@
 					<div id="user-info-icon-container">
 						<form action="/gourylls/user/changeicon" method="POST" role="form" enctype="multipart/form-data">
 							<div id="user-info-icon" class="user-info-icon img-circle">
-                                                            <img id="user-info-icon-img" class="img-circle" src="<?=$data['iconPath']?>"/>
+                                                            <img id="user-info-icon-img" class="img-circle" src="<?=$data['iconPath']?>" title="<?=$data['ID']?>"/>
 								<div id="upload-icon-container" class="form-group">	
 									<input id="upload-icon" class="form-control" name="file" type="file" accept="image/*" /><!--get username from database-->
                                                                         <?php
@@ -95,7 +101,7 @@
 
 				<div id="user-info-edit-a"><!--display only when username matches-->
                                     <?php
-                                    if($this->isLoggedIn())
+                                    if($this->isCurrentUser($data['ID'])&&$this->isLoggedIn())
                                     {
                                     ?>
 					<a href="#" onclick="showEditForm('changeName')">edit my profile</a>

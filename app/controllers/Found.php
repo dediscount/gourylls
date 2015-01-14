@@ -12,11 +12,18 @@ class Found extends Controller {
 
     public function loadMore() {
         if (isset($_POST['num'])) {
+            //echo $_POST['num'];
             $user = $this->model('User');
             $pics = $this->model("Picture");
             $pic = $pics->getPictureByRow($_POST['num']);
             $liked = $user->isLiked($pic['ID']);
-            $this->view('found/loadmore', ['userID'=>$pic['userID'],'title' => $pic['title'], 'picID' => $pic['ID'], 'picPath' => $pic['pic_path'], 'description' => $pic['description'], 'p_iconPath' => $pic['icon_path'], 'date' => $pic['uploadingDate'], 'liked' => $liked]);
+            if(!$pic)
+            {
+                echo '<script>loadPic=-2;</script>';
+            }else{
+                $this->view('found/loadmore', ['pic'=>$pic, 'liked' => $liked]);
+            }
+            
         }
     }
 
