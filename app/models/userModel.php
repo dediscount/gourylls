@@ -90,6 +90,7 @@ class UserModel extends Model {
     }
 
     public function movePicture($tempName, $pictureName) {
+        $this->mkUserMapping();
         $this->moveFile($tempName, $pictureName, $this->getPictureMapping());
     }
 
@@ -132,7 +133,7 @@ class UserModel extends Model {
     }
 
     private function getPictureMapping() {
-        return $this->getUserMapping() . '/pictures/';
+        return $this->getUserMapping() . '/pictures';
     }
 
     private function newDirectory($location) {
