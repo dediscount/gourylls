@@ -129,11 +129,11 @@ class UserModel extends Model {
 
     private function mkUserMapping() {
         $this->newDirectory($this->getUserMapping());
-        $this->newDirectory($this->getUserMapping() . '/pictures');
+        $this->newDirectory($this->getPictureMapping());
     }
 
     private function getPictureMapping() {
-        return $this->getUserMapping() . '/pictures';
+        return $this->getUserMapping() . 'pictures';
     }
 
     private function newDirectory($location) {

@@ -28,7 +28,7 @@
     <div class="found-photo"><!--found-photo module, display photos here-->
         <script type="text/javascript">$(document).scroll(checkload);</script>
         <div id="loadmore" class="found-photo-load">
-            <span class="loadmore">End</span>
+            <span class="loadmore"></span>
         </div>
     </div><!-- /.found-photo -->
 </div>

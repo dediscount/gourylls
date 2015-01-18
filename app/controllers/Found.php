@@ -19,7 +19,8 @@ class Found extends Controller {
             $liked = $user->isLiked($pic['ID']);
             if(!$pic)
             {
-                echo '<script>loadPic=-2;</script>';
+                echo '<script>loadPic=-2;var x=document.getElementsByClassName("loadmore");
+    x[0].innerHTML = "End";</script>';
             }else{
                 $this->view('found/loadmore', ['pic'=>$pic, 'liked' => $liked]);
             }
