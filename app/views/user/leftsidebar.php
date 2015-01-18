@@ -5,7 +5,7 @@
 		<div class="navbar-leftside  navbar-expanded">
 			<a href="/gourylls/found" class="logo-link">
 				<div class="active logo " role="button"><!--reload when clicked-->
-					<span><b>食</b></span>
+					<span class="glyphicon glyphicon-home" style="line-height:65px"></span>
 				</div>
 			</a>
 		</div>
@@ -18,7 +18,7 @@
 <div class="navbar-leftside navbar-shrink" style="height:75px">
 	<a href="/gourylls/found" class="logo-link">
 		<div class="active logo" role="button" href="#">
-			<span><b>食</b></span>
+			<span class="glyphicon glyphicon-home" style="line-height:65px"></span>
 		</div>
 	</a>
 </div>

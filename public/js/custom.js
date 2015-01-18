@@ -83,9 +83,9 @@ function sizeAdjustor()
     {
         $("#user-post-ul").css("padding-left", $("#user-post").width() * 0.015);
     }
-    if ($(".user-post-ul li div").length)
+    if ($(".user-post-ul>li>div").length)
     {
-        $(".user-post-ul li div").css("height", $(".user-post-ul li div").width());
+        $(".user-post-ul>li>div").css("height", $(".user-post-ul>li>div").width());
     }
     if ($(".photo-detail-photo").length)
     {
@@ -749,6 +749,7 @@ function deletePicture()
         dataType: "html",
         success: function (post) {
             $("#photo-detail-block").replaceWith(post);
+            sizeAdjustor();
             $("#user-post-ul > li > div").click(showPhotoDetail);
             $(".user-info-stats-ul > li:nth-of-type(2) > i").html($(".user-info-stats-ul > li:nth-of-type(2) > i").html() - 1);
         },
