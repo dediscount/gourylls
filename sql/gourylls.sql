@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-01-14 21:51:48
+-- Generation Time: 2015-01-18 15:09:04
 -- 服务器版本： 5.6.16
 -- PHP Version: 5.5.11
 
@@ -140,7 +140,14 @@ CREATE TABLE IF NOT EXISTS `pictures` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID` (`ID`,`pic_path`),
   KEY `userID` (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1019 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `pictures`
+--
+
+INSERT INTO `pictures` (`ID`, `pic_path`, `title`, `description`, `format`, `size`, `uploadingDate`, `userID`, `likes`) VALUES
+(3, '/gourylls/public/uploads/249344/pictures/1421314501Deutsch1.jpg', 'c', 'd', 'jpg', 422, '2015-01-15 09:35:01', 249344, 0);
 
 --
 -- 触发器 `pictures`
@@ -184,7 +191,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`ID`, `name`, `account`, `password`, `numOfPhotos`, `register_date`, `icon_path`) VALUES
-(249343, 'YifeiShen', 'shen@yifei.com', 'qwerqwer', 0, '2015-01-14 20:50:46', NULL);
+(249343, 'YifeiShen', 'shen@yifei.com', 'qwerqwer', 0, '2015-01-14 20:50:46', NULL),
+(249344, 'shenyifei', 'shenyifei@xxx.com', 'qwerqwer', 1, '2015-01-15 09:23:19', NULL);
 
 --
 -- 限制导出的表

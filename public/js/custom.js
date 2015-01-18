@@ -314,7 +314,7 @@ function signin()
 function loadmore()
 {
     var i = 0;
-    while (loadPic > -2 && i < 5)
+    while (loadPic > -2 && i < 3)
 
     {
         i++;
