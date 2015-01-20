@@ -696,6 +696,7 @@ function showPost()
         success: function (post) {
             $("#photo-detail-block").replaceWith(post);
             $("#user-post-ul > li > div").click(showPhotoDetail);
+            sizeAdjustor();
             
         },
         error: function (xhr, status, errorThrown) {
