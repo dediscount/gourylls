@@ -1,1 +1,1 @@
-<title>Home</title>
+<title>Gourylls - Home</title>
