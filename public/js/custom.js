@@ -12,6 +12,7 @@ $("document").ready(function () {
         $("#upload-file").replaceWith(uploadPhoto = uploadPhoto.clone(true));
         $("#upload-photo-preview").attr("src", "");
         $("#upload-file").parent().css("display", "inline-block");
+        $("#upload-photo-preview-container").css("display","none");
     }))
         //
         $("#user-post-ul > li > div").click(showPhotoDetail);
@@ -25,6 +26,7 @@ $("document").ready(function () {
             if ($("#upload-file").css("display") != "none")
             {
                 changeFile();
+                $("#upload-photo-preview-container").css("display","block");
                 $("#upload-file").parent().css("display", "none");
             }
         });
@@ -50,6 +52,9 @@ $("document").ready(function () {
             clearSign($("#inputInput-Password"));
         });
     }
+    $("input").keyup(function(){
+    	clearSign(event.target);
+    })
 });
 
 //resize the fixed navigation bar on top of content
@@ -281,7 +286,7 @@ function signin()
             if (data == 1)
             {
                 //alert(typeof(data));
-                showError($("#signin-Account"));
+                showWarning($("#signin-Account"));
             } else if (data == 2)
             {
                 showError($("#signin-Username"));

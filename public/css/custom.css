@@ -152,13 +152,19 @@ alternative color:#F39C12;
 	color: #E6E6E6;
 	padding: 30px;
 	border: #E6E6E6 2px dashed;
-
+	margin-bottom: 20px;
 }
+#upload-photo-preview-container
+{
+	display:none;
+}
+
 #upload-photo-preview
 {
 	max-width: 70%;
 	margin-bottom: 30px;
 }
+
 #upload-photo-text span
 {
 	padding-left: 15px;
