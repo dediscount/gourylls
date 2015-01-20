@@ -375,7 +375,7 @@ function changeName()
             //alert(data);
             if (data == 1)
             {
-                showError($("#user_userName"));
+                showWarning($("#user_userName"));
             }
             else if (data == 0)
             {
